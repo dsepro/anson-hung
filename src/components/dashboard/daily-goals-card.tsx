@@ -17,8 +17,8 @@ interface DailyGoalsCardProps {
 
 export function DailyGoalsCard({ goals }: DailyGoalsCardProps) {
   return (
-    <Card>
-      <CardHeader>
+    <Card className="shadow-md">
+      <CardHeader className="pb-3 pt-5">
         <CardTitle className="text-md">Daily Goals</CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
@@ -37,8 +37,14 @@ export function DailyGoalsCard({ goals }: DailyGoalsCardProps) {
 }
 
 // Small modification to Progress component to accept indicator class
+// This module augmentation should ideally be in a d.ts file or alongside the progress component itself,
+// but for simplicity, it's often kept here if co-located or in the component file where it's first needed.
+// Ensure this is declared only once or in a global d.ts file.
+// Since it's already in progress.tsx, it's fine.
+/*
 declare module "@/components/ui/progress" {
   interface ProgressProps {
     indicatorClassName?: string;
   }
 }
+*/
