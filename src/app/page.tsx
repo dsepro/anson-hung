@@ -8,7 +8,7 @@ import { IngredientInputForm } from '@/components/nutritrack/ingredient-input-fo
 import { SelectedIngredientsList } from '@/components/nutritrack/selected-ingredients-list';
 import { NutritionDisplay } from '@/components/nutritrack/nutrition-display';
 import { RecipeManager } from '@/components/nutritrack/recipe-manager';
-import { LanguageSelector } from '@/components/nutritrack/language-selector'; // Added
+import { LanguageSelector } from '@/components/nutritrack/language-selector';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Salad, Loader2, Github } from 'lucide-react';
@@ -35,6 +35,8 @@ const translations = {
     toastAnalysisCompleteDescription: "Nutritional information has been generated.",
     toastAnalysisFailedTitle: "Analysis Failed",
     toastAnalysisFailedDescription: (errorMessage: string) => `Could not retrieve nutritional data. ${errorMessage}`,
+    sampleIngredientsLoadedTitle: "Sample Ingredients Loaded",
+    sampleIngredientsLoadedDescription: "A few sample ingredients have been added for you to try!",
   },
   zh: {
     headerTitle: "營養追踪",
@@ -55,8 +57,12 @@ const translations = {
     toastAnalysisCompleteDescription: "營養信息已生成。",
     toastAnalysisFailedTitle: "分析失敗",
     toastAnalysisFailedDescription: (errorMessage: string) => `無法檢索營養數據。 ${errorMessage}`,
+    sampleIngredientsLoadedTitle: "已加載示例成分",
+    sampleIngredientsLoadedDescription: "已為您添加了一些示例成分供您嘗試！",
   }
 };
+
+const initialSampleIngredients = ["1 large apple", "100g raw spinach", "1 slice whole wheat bread"];
 
 export default function NutriTrackPage() {
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
@@ -64,15 +70,36 @@ export default function NutriTrackPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
-  const [language, setLanguage] = useState<'en' | 'zh'>('en'); // Added language state
+  const [language, setLanguage] = useState<'en' | 'zh'>('en');
 
-  const currentTranslations = translations[language]; // Helper for current language translations
+  const currentTranslations = translations[language];
 
-  // State to manage initial render and prevent hydration mismatch for localStorage access
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);
-  }, []);
+    // Load sample ingredients only on initial client render and if no ingredients are already selected
+    // (e.g. from a loaded recipe or previous session if we had persistence for selectedIngredients)
+    if (selectedIngredients.length === 0) {
+        setSelectedIngredients(initialSampleIngredients);
+        // Use a timeout to ensure the toast appears after the initial UI is settled
+        setTimeout(() => {
+            toast({
+                title: translations[language].sampleIngredientsLoadedTitle, // Use translations directly here as currentTranslations might not be updated yet
+                description: translations[language].sampleIngredientsLoadedDescription,
+                className: "bg-accent text-accent-foreground"
+            });
+        }, 100);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Run only once on mount
+
+  useEffect(() => {
+    // Update toast language if language changes after sample ingredients loaded
+    if (selectedIngredients.length === initialSampleIngredients.length && selectedIngredients.every((val, index) => val === initialSampleIngredients[index])) {
+        // This is a simple check, could be improved if needed
+    }
+  }, [language, selectedIngredients, toast]);
+
 
   const handleAddIngredient = (ingredient: string) => {
     if (!selectedIngredients.includes(ingredient)) {
@@ -113,7 +140,7 @@ export default function NutriTrackPage() {
     } catch (e) {
       console.error("Error analyzing ingredients:", e);
       const errorMessage = e instanceof Error ? e.message : "An unknown error occurred during analysis.";
-      setError(`Failed to analyze ingredients. ${errorMessage}`); // This error is shown in NutritionDisplay, consider localizing it there or passing language
+      setError(`Failed to analyze ingredients. ${errorMessage}`);
       toast({ title: currentTranslations.toastAnalysisFailedTitle, description: currentTranslations.toastAnalysisFailedDescription(errorMessage), variant: "destructive" });
     } finally {
       setIsLoading(false);
@@ -122,7 +149,7 @@ export default function NutriTrackPage() {
 
   const handleLoadRecipeIngredients = (ingredients: string[]) => {
     setSelectedIngredients(ingredients);
-    setAnalysisResult(null); // Clear previous analysis when loading a recipe
+    setAnalysisResult(null); 
     setError(null);
   };
 
@@ -148,7 +175,6 @@ export default function NutriTrackPage() {
 
       <main className="flex-grow container mx-auto p-4 sm:p-8">
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Left Panel: Pass language and translations if child components need localization */}
           <div className="w-full lg:w-2/5 xl:w-1/3 space-y-6">
             <IngredientInputForm onAddIngredient={handleAddIngredient} /> 
             <SelectedIngredientsList
@@ -158,7 +184,7 @@ export default function NutriTrackPage() {
               onAnalyze={handleAnalyzeIngredients}
               isAnalyzing={isLoading}
             />
-            {isClient && ( // Render RecipeManager only on client to use localStorage
+            {isClient && ( 
                <RecipeManager
                 currentIngredients={selectedIngredients}
                 onLoadRecipe={handleLoadRecipeIngredients}
@@ -166,7 +192,6 @@ export default function NutriTrackPage() {
             )}
           </div>
 
-          {/* Right Panel: Pass language and translations if child components need localization */}
           <div className="w-full lg:w-3/5 xl:w-2/3">
             <NutritionDisplay analysis={analysisResult} isLoading={isLoading} error={error} />
           </div>
@@ -186,5 +211,3 @@ export default function NutriTrackPage() {
     </div>
   );
 }
-
-    
