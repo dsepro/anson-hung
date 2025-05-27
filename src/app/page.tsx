@@ -22,7 +22,7 @@ const translations = {
     logOut: "Log out",
     // LeftSidebar
     chatWithDietitian: "Chat with Dietitian",
-    userConditionExample: "Type 2 Diabetes, Hypertension",
+    userConditionExample: "Type 2 Diabetes, Hypertension", // Added for EN
     // DailyGoalsCard
     dailyGoalsTitle: "Daily Goals",
     calories: "Calories",
@@ -81,7 +81,7 @@ const translations = {
     // Language Selector
     language: "Language",
     // Footer
-    footerCredit: "This demo webpage was created and designed by Hyun Ling Hung for application to Postgraduate Diploma in Human Nutrition and Postgraduate Diploma in Dietetics.",
+    footerCredit: "This demo webpage was created and designed by Anson Hung for the application to Postgraduate Diploma in Human Nutrition and Postgraduate Diploma in Dietetics.",
   },
   zh: {
     loadingText: "正在載入儀表板...",
@@ -93,7 +93,7 @@ const translations = {
     logOut: "登出",
     // LeftSidebar
     chatWithDietitian: "與營養師聊天",
-    userConditionExample: "二型糖尿病，高血壓",
+    userConditionExample: "二型糖尿病，高血壓", // User condition is dynamic data, placeholder for translation
     // DailyGoalsCard
     dailyGoalsTitle: "每日目標",
     calories: "卡路里",
@@ -112,7 +112,7 @@ const translations = {
     dinner: "晚餐",
     snacks: "零食",
     kcalUnit: "千卡",
-    noMealsLogged: "尚未記錄{mealType}。",
+    noMealsLogged: "{mealType}尚未記錄。", // Adjusted translation
     // QuickAddFoodSection
     quickAddFoodTitle: "快速新增食物",
     oatmeal: "燕麥片",
@@ -152,7 +152,7 @@ const translations = {
     // Language Selector
     language: "語言",
     // Footer
-    footerCredit: "此示範用網頁由洪鉉玲製作和設計 供報考Postgraduate Diploma in Human Nutrition 人類營養學深造文憑 Postgraduate Diploma in Dietetics 營養治療學深造文憑 用",
+    footerCredit: "此示範用網頁由洪鉉玲製作和設計 供報考 人類營養學深造文憑/營養治療學深造文憑用",
   }
 };
 
@@ -185,7 +185,7 @@ export default function NutriTrackDashboardPage() {
       
       <div className="flex flex-1 flex-col md:flex-row overflow-hidden">
         <LeftSidebar translations={currentTranslations} />
-        <MainContentArea translations={currentTranslations} />
+        <MainContentArea translations={currentTranslations} language={language} />
         <RightSidebar translations={currentTranslations} />
       </div>
       
@@ -200,3 +200,4 @@ export default function NutriTrackDashboardPage() {
     </div>
   );
 }
+
