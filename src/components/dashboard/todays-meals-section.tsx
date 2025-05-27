@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, PlusCircle } from 'lucide-react';
 import Image from 'next/image';
-import type { Translations } from '@/app/page';
+import type { Translations, Language } from '@/app/page'; // Import Language type
 
 interface MealItem {
   id: string;
@@ -45,9 +45,10 @@ type MealCategoryKey = keyof MealsData;
 
 interface TodaysMealsSectionProps {
   translations: Translations;
+  language: Language; // Add language prop
 }
 
-export function TodaysMealsSection({ translations }: TodaysMealsSectionProps) {
+export function TodaysMealsSection({ translations, language }: TodaysMealsSectionProps) {
   const [currentDate, setCurrentDate] = useState(new Date(2023, 4, 15)); // Month is 0-indexed, so 4 is May
   const [mealsData, setMealsData] = useState<MealsData>(initialMockMeals); 
 
@@ -59,9 +60,8 @@ export function TodaysMealsSection({ translations }: TodaysMealsSectionProps) {
   };
 
   const formatDate = (date: Date) => {
-    // Basic formatting, consider date-fns for robust i18n
-    if (translations.kcalUnit === "千卡") { // Heuristic for Chinese
-        return date.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+    if (language === 'zh') {
+        return date.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' });
     }
     return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   };
@@ -87,7 +87,7 @@ export function TodaysMealsSection({ translations }: TodaysMealsSectionProps) {
             <Button variant="ghost" size="icon" onClick={() => changeDate(-1)} className="h-8 w-8">
               <ChevronLeft className="h-5 w-5" />
             </Button>
-            <span className="text-sm font-medium min-w-[110px] sm:min-w-[130px] text-center">{formatDate(currentDate)}</span>
+            <span className="text-sm font-medium min-w-[110px] sm:min-w-[150px] text-center">{formatDate(currentDate)}</span>
             <Button variant="ghost" size="icon" onClick={() => changeDate(1)} className="h-8 w-8">
               <ChevronRight className="h-5 w-5" />
             </Button>
@@ -108,7 +108,6 @@ export function TodaysMealsSection({ translations }: TodaysMealsSectionProps) {
                     <div className="flex items-center gap-3">
                       <Image src={item.iconUrl} alt={item.name} width={32} height={32} className="rounded-full" data-ai-hint={item.dataAiHint} />
                       <div>
-                        {/* Item name is dynamic data, not from static translations */}
                         <p className="text-sm font-medium">{item.name}</p> 
                         <p className="text-xs text-muted-foreground">{item.quantity}</p>
                       </div>
@@ -125,7 +124,7 @@ export function TodaysMealsSection({ translations }: TodaysMealsSectionProps) {
                 {translations.noMealsLogged.replace('{mealType}', mealTitles[category].toLowerCase())}
               </p>
             )}
-            <Button variant="outline" className="w-full mt-3 text-xs h-8 border-dashed hover:border-primary hover:text-primary text-muted-foreground hover:bg-accent">
+            <Button variant="outline" className="w-full mt-3 text-xs h-8 border-dashed hover:border-primary hover:text-primary text-muted-foreground hover:bg-accent/50">
               <PlusCircle className="mr-1.5 h-3.5 w-3.5" /> {translations.addFood}
             </Button>
           </div>
