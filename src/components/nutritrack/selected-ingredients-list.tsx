@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Button } from '@/components/ui/button';
@@ -13,6 +14,8 @@ interface SelectedIngredientsListProps {
   isAnalyzing: boolean;
 }
 
+// This component is not directly used in the new dashboard page structure.
+// Its functionality might be integrated into how "Today's Meals" are managed.
 export function SelectedIngredientsList({
   ingredients,
   onRemoveIngredient,

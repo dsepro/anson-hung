@@ -8,17 +8,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Globe } from 'lucide-react'; // Icon for language
+import { Globe } from 'lucide-react';
 
 interface LanguageSelectorProps {
   language: 'en' | 'zh';
   onLanguageChange: (lang: 'en' | 'zh') => void;
+  className?: string;
 }
 
-export function LanguageSelector({ language, onLanguageChange }: LanguageSelectorProps) {
+export function LanguageSelector({ language, onLanguageChange, className }: LanguageSelectorProps) {
   return (
     <Select value={language} onValueChange={(value: 'en' | 'zh') => onLanguageChange(value)}>
-      <SelectTrigger className="w-[110px] sm:w-[120px] text-sm h-9">
+      <SelectTrigger className={className ? className : "w-[110px] sm:w-[120px] text-sm h-9"}>
         <Globe className="mr-1.5 h-4 w-4 sm:mr-2" />
         <SelectValue placeholder="Language" />
       </SelectTrigger>
@@ -29,5 +30,3 @@ export function LanguageSelector({ language, onLanguageChange }: LanguageSelecto
     </Select>
   );
 }
-
-    

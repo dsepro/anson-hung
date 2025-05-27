@@ -1,8 +1,9 @@
+
 "use client";
 
 import type { NutrientInfo } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { NutrientCard } from './nutrient-card';
+// import { NutrientCard } from './nutrient-card'; // Old component
 import { Skeleton } from '@/components/ui/skeleton';
 import {
   Flame,
@@ -25,6 +26,9 @@ interface NutritionDisplayProps {
   error: string | null;
 }
 
+// This component is not directly used in the new dashboard page structure.
+// The "Nutrition Summary" section will likely replace or adapt parts of this.
+// For now, marking its content as largely irrelevant to the new dashboard page.
 export function NutritionDisplay({ analysis, isLoading, error }: NutritionDisplayProps) {
   if (isLoading) {
     return (
@@ -76,7 +80,7 @@ export function NutritionDisplay({ analysis, isLoading, error }: NutritionDispla
           <div className="flex flex-col items-center justify-center h-48 text-center">
             <Info className="h-12 w-12 text-muted-foreground mb-4" />
             <p className="text-muted-foreground">
-              Enter some ingredients and click "Analyze Nutrition" to see their profile.
+              Nutrition details will appear here once calculated.
             </p>
           </div>
         </CardContent>
@@ -98,53 +102,20 @@ export function NutritionDisplay({ analysis, isLoading, error }: NutritionDispla
     otherNutrients,
   } = analysis;
 
+  // The detailed card display is not part of the new main dashboard.
+  // This could be a modal or a sub-page.
   return (
     <Card className="shadow-xl">
       <CardHeader>
-        <CardTitle className="text-xl text-primary">Nutritional Analysis</CardTitle>
+        <CardTitle className="text-xl text-primary">Detailed Nutritional Analysis</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-6">
-        <div>
-          <h3 className="text-lg font-semibold mb-3 text-foreground">Overall</h3>
-          <NutrientCard icon={Flame} label="Calories" value={calories} unit="kcal" />
-        </div>
-
-        <div>
-          <h3 className="text-lg font-semibold mb-3 text-foreground">Macronutrients</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <NutrientCard icon={Drumstick} label="Protein" value={protein} unit="g" />
-            <NutrientCard icon={CookingPot} label="Fat" value={fat} unit="g" />
-            <NutrientCard icon={Wheat} label="Carbohydrates" value={carbohydrates} unit="g" />
-          </div>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-semibold mb-3 text-foreground">Fiber & Sugar</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <NutrientCard icon={Leaf} label="Fiber" value={fiber} unit="g" />
-            <NutrientCard icon={Candy} label="Sugar" value={sugar} unit="g" />
-          </div>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-semibold mb-3 text-foreground">Vitamins & Minerals</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <NutrientCard icon={Eye} label="Vitamin A" value={vitaminA} />
-            <NutrientCard icon={Sparkles} label="Vitamin C" value={vitaminC} />
-            <NutrientCard icon={Milk} label="Calcium" value={calcium} />
-            <NutrientCard icon={Atom} label="Iron" value={iron} />
-          </div>
-        </div>
-
-        {otherNutrients && (
-          <div>
-            <h3 className="text-lg font-semibold mb-3 text-foreground">Additional Notes</h3>
-            <div className="p-4 bg-secondary/30 rounded-lg">
-              <p className="text-sm text-foreground/80">{otherNutrients}</p>
-            </div>
-          </div>
-        )}
+      <CardContent className="space-y-2">
+        <p>Calories: {calories} kcal</p>
+        <p>Protein: {protein} g</p>
+        {/* ... other nutrients ... */}
+        {otherNutrients && <p>Other: {otherNutrients}</p>}
       </CardContent>
     </Card>
   );
 }
+

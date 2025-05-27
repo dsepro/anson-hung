@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, type FormEvent } from 'react';
@@ -9,6 +10,8 @@ interface IngredientInputFormProps {
   onAddIngredient: (ingredient: string) => void;
 }
 
+// This component is not directly used in the new dashboard page structure.
+// It might be repurposed for an "Add Food" modal later.
 export function IngredientInputForm({ onAddIngredient }: IngredientInputFormProps) {
   const [ingredientName, setIngredientName] = useState('');
 

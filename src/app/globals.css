@@ -3,101 +3,101 @@
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
 @layer base {
   :root {
-    --background: 105 23% 95%; /* #F0F4EF - Light Desaturated Green */
-    --foreground: 120 25% 25%; /* Dark Green for text */
+    --background: 220 20% 97%; /* Light cool gray */
+    --foreground: 215 25% 28%; /* Dark slate gray for text */
 
-    --card: 105 23% 98%; /* Slightly lighter than background for cards */
+    --card: 0 0% 100%; /* White */
     --card-foreground: var(--foreground);
 
-    --popover: 105 23% 98%;
+    --popover: 0 0% 100%;
     --popover-foreground: var(--foreground);
 
-    --primary: 130 36% 70%; /* #A7D1AB - Vibrant Healthy Green */
-    --primary-foreground: 130 30% 15%; /* Dark green/black for text on primary */
+    --primary: 145 60% 40%; /* Vibrant Green */
+    --primary-foreground: 0 0% 100%; /* White for text on primary */
 
-    --secondary: 130 25% 85%; /* Lighter shade of primary */
-    --secondary-foreground: 130 30% 20%;
+    --secondary: 205 65% 50%; /* Vibrant Blue for scan barcode */
+    --secondary-foreground: 0 0% 100%; /* White for text on secondary */
 
-    --muted: 105 15% 88%; /* Muted color based on background */
-    --muted-foreground: 120 10% 45%; /* Muted foreground text */
+    --muted: 220 15% 90%; /* Muted color based on background */
+    --muted-foreground: 215 15% 55%; /* Muted foreground text */
 
-    --accent: 50 82% 75%; /* #F4E285 - Warm Inviting Yellow */
-    --accent-foreground: 50 60% 25%; /* Darker yellow/brown for text on accent */
+    --accent: 140 55% 50%; /* A slightly lighter green, can adjust */
+    --accent-foreground: 0 0% 100%; 
 
     --destructive: 0 70% 60%; /* Standard red for destructive actions */
     --destructive-foreground: 0 0% 98%; /* Light text for destructive */
 
-    --border: 105 20% 88%; /* Border color based on background */
-    --input: 105 20% 92%;  /* Input background, slightly distinct from background */
-    --ring: 130 36% 60%; /* Ring color based on primary, slightly darker for focus */
+    --border: 220 15% 88%; /* Border color based on background */
+    --input: 0 0% 100%;  /* Input background, white */
+    --ring: 145 60% 50%; /* Ring color based on primary for focus */
     
-    --chart-1: 130 40% 65%;
-    --chart-2: 50 75% 70%;
-    --chart-3: 200 50% 60%;
-    --chart-4: 20 60% 70%;
-    --chart-5: 280 50% 65%;
+    --chart-1: 145 50% 55%;
+    --chart-2: 205 60% 60%;
+    --chart-3: 40 80% 65%; /* Orange */
+    --chart-4: 0 70% 70%; /* Reddish */
+    --chart-5: 260 60% 70%; /* Purple */
     
     --radius: 0.5rem;
 
-    /* Sidebar variables - retaining for completeness, though not heavily used in this design */
-    --sidebar-background: 105 20% 92%; /* Slightly darker than main background */
+    /* Sidebar variables */
+    --sidebar-background: 0 0% 100%; /* White sidebar */
     --sidebar-foreground: var(--foreground);
     --sidebar-primary: var(--primary);
     --sidebar-primary-foreground: var(--primary-foreground);
-    --sidebar-accent: var(--accent);
-    --sidebar-accent-foreground: var(--accent-foreground);
-    --sidebar-border: 105 18% 85%;
+    --sidebar-accent: hsl(145 60% 40% / 0.1); /* Light green accent for hover */
+    --sidebar-accent-foreground: var(--primary);
+    --sidebar-border: var(--border);
     --sidebar-ring: var(--ring);
   }
 
   .dark {
-    /* Define dark theme variables if needed in future, for now keeping it consistent with light theme for simplicity */
-    --background: 120 10% 10%;
-    --foreground: 105 20% 90%;
+    /* Basic dark theme, can be expanded */
+    --background: 215 28% 17%;
+    --foreground: 210 40% 98%;
 
-    --card: 120 10% 15%;
+    --card: 215 28% 22%;
     --card-foreground: var(--foreground);
 
-    --popover: 120 10% 15%;
+    --popover: 215 28% 22%;
     --popover-foreground: var(--foreground);
 
-    --primary: 130 36% 60%;
-    --primary-foreground: 130 30% 90%;
+    --primary: 145 55% 45%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 130 25% 25%;
-    --secondary-foreground: 130 30% 90%;
+    --secondary: 205 60% 55%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 120 10% 20%;
-    --muted-foreground: 105 15% 60%;
+    --muted: 215 20% 30%;
+    --muted-foreground: 210 30% 70%;
 
-    --accent: 50 82% 65%;
-    --accent-foreground: 50 60% 15%;
+    --accent: 140 50% 55%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 60% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 120 10% 25%;
-    --input: 120 10% 22%;
-    --ring: 130 36% 50%;
+    --border: 215 20% 35%;
+    --input: 215 25% 25%;
+    --ring: 145 55% 55%;
     
-    --chart-1: 130 40% 55%;
-    --chart-2: 50 75% 60%;
-    --chart-3: 200 50% 50%;
-    --chart-4: 20 60% 60%;
-    --chart-5: 280 50% 55%;
+    --chart-1: 145 50% 50%;
+    --chart-2: 205 60% 55%;
+    --chart-3: 40 75% 60%;
+    --chart-4: 0 65% 65%;
+    --chart-5: 260 55% 65%;
 
-    --sidebar-background: 120 10% 12%;
+    --sidebar-background: 215 28% 19%; /* Darker sidebar */
     --sidebar-foreground: var(--foreground);
     --sidebar-primary: var(--primary);
     --sidebar-primary-foreground: var(--primary-foreground);
-    --sidebar-accent: var(--accent);
-    --sidebar-accent-foreground: var(--accent-foreground);
-    --sidebar-border: 120 10% 20%;
+    --sidebar-accent: hsl(145 55% 45% / 0.15);
+    --sidebar-accent-foreground: var(--primary);
+    --sidebar-border: var(--border);
     --sidebar-ring: var(--ring);
   }
 }
@@ -107,7 +107,7 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-sans; /* Use Tailwind's font-sans for Geist */
+    @apply bg-background text-foreground font-sans;
     min-height: 100vh;
   }
 }
