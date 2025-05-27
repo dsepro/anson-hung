@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -7,10 +8,55 @@ import { IngredientInputForm } from '@/components/nutritrack/ingredient-input-fo
 import { SelectedIngredientsList } from '@/components/nutritrack/selected-ingredients-list';
 import { NutritionDisplay } from '@/components/nutritrack/nutrition-display';
 import { RecipeManager } from '@/components/nutritrack/recipe-manager';
+import { LanguageSelector } from '@/components/nutritrack/language-selector'; // Added
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Salad, Loader2, Github } from 'lucide-react';
 import Link from 'next/link';
+
+// Translations
+const translations = {
+  en: {
+    headerTitle: "NutriTrack",
+    githubButton: "View on GitHub",
+    footerText1: "NutriTrack. Powered by Generative AI.",
+    loadingText: "Analyzing Nutrition...",
+    toastIngredientAddedTitle: "Ingredient Added",
+    toastIngredientAddedDescription: (ingredient: string) => `"${ingredient}" added to the list.`,
+    toastAlreadyAddedTitle: "Already Added",
+    toastAlreadyAddedDescription: (ingredient: string) => `"${ingredient}" is already in the list.`,
+    toastIngredientRemovedTitle: "Ingredient Removed",
+    toastIngredientRemovedDescription: (ingredient: string) => `"${ingredient}" removed from the list.`,
+    toastListClearedTitle: "List Cleared",
+    toastListClearedDescription: "All ingredients have been removed.",
+    toastNoIngredientsTitle: "No Ingredients",
+    toastNoIngredientsDescription: "Please add some ingredients to analyze.",
+    toastAnalysisCompleteTitle: "Analysis Complete!",
+    toastAnalysisCompleteDescription: "Nutritional information has been generated.",
+    toastAnalysisFailedTitle: "Analysis Failed",
+    toastAnalysisFailedDescription: (errorMessage: string) => `Could not retrieve nutritional data. ${errorMessage}`,
+  },
+  zh: {
+    headerTitle: "營養追踪",
+    githubButton: "在 GitHub 上查看",
+    footerText1: "營養追踪。由生成式人工智能驅動。",
+    loadingText: "正在分析營養...",
+    toastIngredientAddedTitle: "已添加食材",
+    toastIngredientAddedDescription: (ingredient: string) => `"${ingredient}" 已添加到列表。`,
+    toastAlreadyAddedTitle: "已存在",
+    toastAlreadyAddedDescription: (ingredient: string) => `"${ingredient}" 已在列表中。`,
+    toastIngredientRemovedTitle: "已移除食材",
+    toastIngredientRemovedDescription: (ingredient: string) => `"${ingredient}" 已從列表中移除。`,
+    toastListClearedTitle: "列表已清除",
+    toastListClearedDescription: "所有食材均已移除。",
+    toastNoIngredientsTitle: "沒有食材",
+    toastNoIngredientsDescription: "請添加一些食材進行分析。",
+    toastAnalysisCompleteTitle: "分析完成！",
+    toastAnalysisCompleteDescription: "營養信息已生成。",
+    toastAnalysisFailedTitle: "分析失敗",
+    toastAnalysisFailedDescription: (errorMessage: string) => `無法檢索營養數據。 ${errorMessage}`,
+  }
+};
 
 export default function NutriTrackPage() {
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
@@ -18,7 +64,10 @@ export default function NutriTrackPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
-  
+  const [language, setLanguage] = useState<'en' | 'zh'>('en'); // Added language state
+
+  const currentTranslations = translations[language]; // Helper for current language translations
+
   // State to manage initial render and prevent hydration mismatch for localStorage access
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
@@ -28,27 +77,27 @@ export default function NutriTrackPage() {
   const handleAddIngredient = (ingredient: string) => {
     if (!selectedIngredients.includes(ingredient)) {
       setSelectedIngredients((prev) => [...prev, ingredient]);
-      toast({ title: "Ingredient Added", description: `"${ingredient}" added to the list.`, className: "bg-primary text-primary-foreground"});
+      toast({ title: currentTranslations.toastIngredientAddedTitle, description: currentTranslations.toastIngredientAddedDescription(ingredient), className: "bg-primary text-primary-foreground"});
     } else {
-      toast({ title: "Already Added", description: `"${ingredient}" is already in the list.`, variant: "default"});
+      toast({ title: currentTranslations.toastAlreadyAddedTitle, description: currentTranslations.toastAlreadyAddedDescription(ingredient), variant: "default"});
     }
   };
 
   const handleRemoveIngredient = (ingredientToRemove: string) => {
     setSelectedIngredients((prev) => prev.filter((ing) => ing !== ingredientToRemove));
-    toast({ title: "Ingredient Removed", description: `"${ingredientToRemove}" removed from the list.`, variant: "destructive" });
+    toast({ title: currentTranslations.toastIngredientRemovedTitle, description: currentTranslations.toastIngredientRemovedDescription(ingredientToRemove), variant: "destructive" });
   };
 
   const handleClearIngredients = () => {
     setSelectedIngredients([]);
     setAnalysisResult(null);
     setError(null);
-    toast({ title: "List Cleared", description: "All ingredients have been removed." });
+    toast({ title: currentTranslations.toastListClearedTitle, description: currentTranslations.toastListClearedDescription });
   };
 
   const handleAnalyzeIngredients = async () => {
     if (selectedIngredients.length === 0) {
-      toast({ title: "No Ingredients", description: "Please add some ingredients to analyze.", variant: "destructive" });
+      toast({ title: currentTranslations.toastNoIngredientsTitle, description: currentTranslations.toastNoIngredientsDescription, variant: "destructive" });
       return;
     }
 
@@ -60,12 +109,12 @@ export default function NutriTrackPage() {
       const ingredientsString = selectedIngredients.join(', ');
       const result = await analyzeIngredients({ ingredients: ingredientsString });
       setAnalysisResult(result);
-      toast({ title: "Analysis Complete!", description: "Nutritional information has been generated.", className: "bg-primary text-primary-foreground" });
+      toast({ title: currentTranslations.toastAnalysisCompleteTitle, description: currentTranslations.toastAnalysisCompleteDescription, className: "bg-primary text-primary-foreground" });
     } catch (e) {
       console.error("Error analyzing ingredients:", e);
       const errorMessage = e instanceof Error ? e.message : "An unknown error occurred during analysis.";
-      setError(`Failed to analyze ingredients. ${errorMessage}`);
-      toast({ title: "Analysis Failed", description: `Could not retrieve nutritional data. ${errorMessage}`, variant: "destructive" });
+      setError(`Failed to analyze ingredients. ${errorMessage}`); // This error is shown in NutritionDisplay, consider localizing it there or passing language
+      toast({ title: currentTranslations.toastAnalysisFailedTitle, description: currentTranslations.toastAnalysisFailedDescription(errorMessage), variant: "destructive" });
     } finally {
       setIsLoading(false);
     }
@@ -83,22 +132,25 @@ export default function NutriTrackPage() {
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Salad className="h-10 w-10 text-primary" />
-            <h1 className="text-3xl font-bold text-primary">NutriTrack</h1>
+            <h1 className="text-3xl font-bold text-primary">{currentTranslations.headerTitle}</h1>
           </div>
-           <Button variant="outline" size="sm" asChild>
-            <Link href="https://github.com/FirebaseExtended/genkit-nextjs-template" target="_blank" rel="noopener noreferrer">
-              <Github className="mr-2 h-4 w-4" />
-              View on GitHub
-            </Link>
-          </Button>
+          <div className="flex items-center gap-2 sm:gap-4">
+            <LanguageSelector language={language} onLanguageChange={setLanguage} />
+            <Button variant="outline" size="sm" asChild>
+              <Link href="https://github.com/FirebaseExtended/genkit-nextjs-template" target="_blank" rel="noopener noreferrer">
+                <Github className="mr-2 h-4 w-4" />
+                {currentTranslations.githubButton}
+              </Link>
+            </Button>
+          </div>
         </div>
       </header>
 
       <main className="flex-grow container mx-auto p-4 sm:p-8">
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Left Panel */}
+          {/* Left Panel: Pass language and translations if child components need localization */}
           <div className="w-full lg:w-2/5 xl:w-1/3 space-y-6">
-            <IngredientInputForm onAddIngredient={handleAddIngredient} />
+            <IngredientInputForm onAddIngredient={handleAddIngredient} /> 
             <SelectedIngredientsList
               ingredients={selectedIngredients}
               onRemoveIngredient={handleRemoveIngredient}
@@ -114,7 +166,7 @@ export default function NutriTrackPage() {
             )}
           </div>
 
-          {/* Right Panel */}
+          {/* Right Panel: Pass language and translations if child components need localization */}
           <div className="w-full lg:w-3/5 xl:w-2/3">
             <NutritionDisplay analysis={analysisResult} isLoading={isLoading} error={error} />
           </div>
@@ -122,15 +174,17 @@ export default function NutriTrackPage() {
       </main>
 
       <footer className="py-4 text-center text-sm text-muted-foreground border-t border-border mt-auto bg-card">
-        <p>&copy; {new Date().getFullYear()} NutriTrack. Powered by Generative AI.</p>
+        <p>&copy; {new Date().getFullYear()} {currentTranslations.footerText1}</p>
       </footer>
       
       {isLoading && (
         <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50">
           <Loader2 className="h-12 w-12 text-primary animate-spin" />
-          <p className="ml-4 text-lg text-primary">Analyzing Nutrition...</p>
+          <p className="ml-4 text-lg text-primary">{currentTranslations.loadingText}</p>
         </div>
       )}
     </div>
   );
 }
+
+    
