@@ -2,6 +2,7 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
+import type { Translations } from '@/app/page';
 
 interface Goal {
   name: string;
@@ -13,20 +14,21 @@ interface Goal {
 
 interface DailyGoalsCardProps {
   goals: Goal[];
+  translations: Translations;
 }
 
-export function DailyGoalsCard({ goals }: DailyGoalsCardProps) {
+export function DailyGoalsCard({ goals, translations }: DailyGoalsCardProps) {
   return (
     <Card className="shadow-md">
       <CardHeader className="pb-3 pt-5">
-        <CardTitle className="text-md">Daily Goals</CardTitle>
+        <CardTitle className="text-md">{translations.dailyGoalsTitle}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
         {goals.map((goal) => (
           <div key={goal.name}>
             <div className="flex justify-between text-xs mb-1">
               <span className="font-medium">{goal.name}</span>
-              <span className="text-muted-foreground">{goal.current}/{goal.target} {goal.unit}</span>
+              <span className="text-muted-foreground">{goal.current}/{goal.target} {goal.unit === 'kcal' ? translations.kcalUnit : goal.unit}</span>
             </div>
             <Progress value={(goal.current / goal.target) * 100} className="h-2" indicatorClassName={goal.color} />
           </div>
@@ -35,16 +37,3 @@ export function DailyGoalsCard({ goals }: DailyGoalsCardProps) {
     </Card>
   );
 }
-
-// Small modification to Progress component to accept indicator class
-// This module augmentation should ideally be in a d.ts file or alongside the progress component itself,
-// but for simplicity, it's often kept here if co-located or in the component file where it's first needed.
-// Ensure this is declared only once or in a global d.ts file.
-// Since it's already in progress.tsx, it's fine.
-/*
-declare module "@/components/ui/progress" {
-  interface ProgressProps {
-    indicatorClassName?: string;
-  }
-}
-*/

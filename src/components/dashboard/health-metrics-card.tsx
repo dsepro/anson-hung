@@ -2,17 +2,18 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Droplets, HeartPulse, TrendingUp, Scale, ArrowRight } from 'lucide-react';
+import { Droplets, HeartPulse, Scale, ArrowRight } from 'lucide-react';
+import type { Translations } from '@/app/page';
 
 interface Metric {
   id: string;
-  name: string;
+  translationKey: keyof Translations;
   value: string;
   unit?: string;
-  statusText: string;
-  statusStyle: 'yellow' | 'green' | 'red' | 'default'; // Added more status types
+  statusTextKey: keyof Translations;
+  statusStyle: 'yellow' | 'green' | 'red' | 'default';
   icon: React.ElementType;
-  time: string;
+  timeKey: keyof Translations;
   change?: string;
   changeStyle?: 'green' | 'red';
 }
@@ -30,44 +31,59 @@ const changeTextStyles = {
 }
 
 const mockMetrics: Metric[] = [
-  { id: 'glucose', name: 'Blood Glucose', value: '128', unit: 'mg/dL', statusText: 'Slightly High', statusStyle: 'yellow', icon: Droplets, time: 'Today' },
-  { id: 'pressure', name: 'Blood Pressure', value: '135/85', unit: 'mmHg', statusText: 'Normal', statusStyle: 'green', icon: HeartPulse, time: 'Today' },
-  { id: 'weight', name: 'Weight', value: '78.5', unit: 'kg', statusText: '-0.5 kg', statusStyle: 'default', icon: Scale, time: 'Yesterday', change: '-0.5 kg', changeStyle: 'green' },
+  { id: 'glucose', translationKey: 'bloodGlucose', value: '128', unit: 'mg/dL', statusTextKey: 'statusSlightlyHigh', statusStyle: 'yellow', icon: Droplets, timeKey: 'timeToday' },
+  { id: 'pressure', translationKey: 'bloodPressure', value: '135/85', unit: 'mmHg', statusTextKey: 'statusNormal', statusStyle: 'green', icon: HeartPulse, timeKey: 'timeToday' },
+  { id: 'weight', translationKey: 'weight', value: '78.5', unit: 'kg', statusTextKey: 'statusValueOnly', statusStyle: 'default', icon: Scale, timeKey: 'timeYesterday', change: '-0.5 kg', changeStyle: 'green' },
 ];
 
-export function HealthMetricsCard() {
+interface HealthMetricsCardProps {
+  translations: Translations;
+}
+
+export function HealthMetricsCard({ translations }: HealthMetricsCardProps) {
   return (
     <Card className="shadow-md">
       <CardHeader className="flex flex-row items-center justify-between pb-2 pt-5">
-        <CardTitle className="text-md">Health Metrics</CardTitle>
-        <Button variant="link" size="sm" className="text-xs h-auto p-0 text-primary hover:text-primary/80">View All <ArrowRight className="ml-1 h-3 w-3"/></Button>
+        <CardTitle className="text-md">{translations.healthMetricsTitle}</CardTitle>
+        <Button variant="link" size="sm" className="text-xs h-auto p-0 text-primary hover:text-primary/80">{translations.viewAll} <ArrowRight className="ml-1 h-3 w-3"/></Button>
       </CardHeader>
       <CardContent className="space-y-3">
-        {mockMetrics.map(metric => (
+        {mockMetrics.map(metric => {
+          let statusTextDisplay = translations[metric.statusTextKey] || '';
+          if (metric.statusTextKey === 'statusValueOnly' && metric.change) {
+            statusTextDisplay = metric.change; // For weight, status text is the change itself
+          } else if (metric.statusTextKey === 'statusValueWithUnit' && metric.change && metric.unit) {
+            statusTextDisplay = translations.statusValueWithUnit
+              .replace('{value}', metric.change)
+              .replace('{unit}', metric.unit);
+          }
+
+
+          return (
           <div key={metric.id} className="p-3 rounded-lg bg-card hover:shadow-sm transition-shadow border border-border/60">
             <div className="flex items-start justify-between mb-1">
               <div className="flex items-center gap-2">
                 <metric.icon className="h-4 w-4 text-primary mt-0.5" />
-                <span className="text-sm font-medium">{metric.name}</span>
+                <span className="text-sm font-medium">{translations[metric.translationKey]}</span>
               </div>
-              <span className="text-xs text-muted-foreground">{metric.time}</span>
+              <span className="text-xs text-muted-foreground">{translations[metric.timeKey]}</span>
             </div>
             <div className="flex items-baseline justify-between mt-1">
                 <div>
                     <span className="text-xl font-bold">{metric.value}</span>
                     {metric.unit && <span className="text-xs text-muted-foreground ml-0.5">{metric.unit}</span>}
                 </div>
-                {metric.change && metric.changeStyle && (
+                {metric.change && metric.changeStyle && metric.id !== 'weight' && ( // Don't show change separately for weight if it's in status
                      <span className={`text-xs font-semibold px-1.5 py-0.5 rounded-sm ${changeTextStyles[metric.changeStyle]}`}>{metric.change}</span>
                 )}
             </div>
              <div className="mt-1.5">
                 <span className={`text-xs font-medium px-2 py-1 rounded-full text-center ${statusStyles[metric.statusStyle]}`}>
-                    {metric.statusText}
+                    {statusTextDisplay}
                 </span>
             </div>
           </div>
-        ))}
+        )})}
       </CardContent>
     </Card>
   );

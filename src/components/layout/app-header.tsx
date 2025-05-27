@@ -2,7 +2,7 @@
 "use client";
 import Link from 'next/link';
 import { Leaf, UserCircle, ChevronDown } from 'lucide-react';
-import { LanguageSelector } from '@/components/nutritrack/language-selector'; // Re-using existing
+import { LanguageSelector } from '@/components/nutritrack/language-selector'; 
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -13,15 +13,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import type { Translations } from '@/app/page';
 
 interface AppHeaderProps {
   language: 'en' | 'zh';
   onLanguageChange: (lang: 'en' | 'zh') => void;
   userName?: string;
   userAvatar?: string; // URL to avatar image
+  translations: Translations;
 }
 
-export function AppHeader({ language, onLanguageChange, userName = "John Doe", userAvatar }: AppHeaderProps) {
+export function AppHeader({ language, onLanguageChange, userName = "John Doe", userAvatar, translations }: AppHeaderProps) {
   const userInitials = userName
     .split(' ')
     .map(n => n[0])
@@ -29,11 +31,11 @@ export function AppHeader({ language, onLanguageChange, userName = "John Doe", u
     .toUpperCase();
 
   return (
-    <header className="bg-card shadow-sm sticky top-0 z-40">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <header className="bg-card shadow-sm sticky top-0 z-40 h-16"> {/* Fixed height for header */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-primary">
           <Leaf className="h-7 w-7" />
-          <span>NutriTrack</span>
+          <span>{translations.nutriTrackTitle}</span>
         </Link>
 
         <div className="flex items-center gap-3 sm:gap-4">
@@ -41,7 +43,7 @@ export function AppHeader({ language, onLanguageChange, userName = "John Doe", u
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="flex items-center gap-2 h-10 px-2">
-                <Avatar className="h-8 w-8">
+                <Avatar className="h-8 w-8" data-ai-hint="profile avatar">
                   {userAvatar && <AvatarImage src={userAvatar} alt={userName} />}
                   <AvatarFallback>{userInitials}</AvatarFallback>
                 </Avatar>
@@ -50,12 +52,12 @@ export function AppHeader({ language, onLanguageChange, userName = "John Doe", u
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel>{translations.myAccount}</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Settings</DropdownMenuItem>
+              <DropdownMenuItem>{translations.profile}</DropdownMenuItem>
+              <DropdownMenuItem>{translations.settings}</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Log out</DropdownMenuItem>
+              <DropdownMenuItem>{translations.logOut}</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

@@ -21,18 +21,145 @@ import { Loader2 } from 'lucide-react'; // Keep for loading states
 const translations = {
   en: {
     loadingText: "Loading Dashboard...",
-    // ... other global texts if needed
+    // AppHeader
+    nutriTrackTitle: "NutriTrack",
+    myAccount: "My Account",
+    profile: "Profile",
+    settings: "Settings",
+    logOut: "Log out",
+    // LeftSidebar
+    chatWithDietitian: "Chat with Dietitian",
+    // UserProfileCard (name, condition are dynamic)
+    // DailyGoalsCard
+    dailyGoalsTitle: "Daily Goals",
+    calories: "Calories",
+    protein: "Protein",
+    carbs: "Carbs",
+    fat: "Fat",
+    sodium: "Sodium",
+    // DietitianRecommendationsCard
+    dietitianRecommendationsTitle: "Dietitian Recommendations",
+    // MainContentArea
+    // TodaysMealsSection
+    todaysMealsTitle: "Today's Meals",
+    addFood: "Add Food",
+    breakfast: "Breakfast",
+    lunch: "Lunch",
+    dinner: "Dinner",
+    snacks: "Snacks",
+    kcalUnit: "kcal",
+    noMealsLogged: "No {mealType} logged yet.",
+    // QuickAddFoodSection
+    quickAddFoodTitle: "Quick Add Food",
+    oatmeal: "Oatmeal",
+    salad: "Salad",
+    apple: "Apple",
+    milk: "Milk",
+    more: "More",
+    takePhoto: "Take Photo",
+    scanBarcode: "Scan Barcode",
+    // NutritionSummarySection
+    nutritionSummaryTitle: "Nutrition Summary",
+    nutritionSummaryPlaceholder: "Detailed nutrition summary chart will be displayed here.",
+    // RightSidebar
+    // MealPlanningCard
+    mealPlanningTitle: "Meal Planning",
+    weeklyPlanTab: "Weekly Plan",
+    recipesTab: "Recipes",
+    weekOf: "Week of {date}",
+    viewAll: "View All",
+    createMealPlan: "Create Meal Plan",
+    yourRecipes: "Your Recipes",
+    addNewRecipe: "Add New Recipe",
+    monday: "Monday",
+    tuesday: "Tuesday",
+    wednesday: "Wednesday",
+    // HealthMetricsCard
+    healthMetricsTitle: "Health Metrics",
+    bloodGlucose: "Blood Glucose",
+    bloodPressure: "Blood Pressure",
+    weight: "Weight",
+    statusSlightlyHigh: "Slightly High",
+    statusNormal: "Normal",
+    statusValueWithUnit: "{value} {unit}",
+    statusValueOnly: "{value}",
+    timeToday: "Today",
+    timeYesterday: "Yesterday",
   },
   zh: {
     loadingText: "正在加载仪表板...",
-    // ... other global texts if needed
+    // AppHeader
+    nutriTrackTitle: "营养追踪",
+    myAccount: "我的账户",
+    profile: "个人资料",
+    settings: "设置",
+    logOut: "登出",
+    // LeftSidebar
+    chatWithDietitian: "与营养师聊天",
+    // DailyGoalsCard
+    dailyGoalsTitle: "每日目标",
+    calories: "卡路里",
+    protein: "蛋白质",
+    carbs: "碳水化合物",
+    fat: "脂肪",
+    sodium: "钠",
+    // DietitianRecommendationsCard
+    dietitianRecommendationsTitle: "营养师建议",
+    // MainContentArea
+    // TodaysMealsSection
+    todaysMealsTitle: "今日膳食",
+    addFood: "添加食物",
+    breakfast: "早餐",
+    lunch: "午餐",
+    dinner: "晚餐",
+    snacks: "零食",
+    kcalUnit: "千卡",
+    noMealsLogged: "尚未记录{mealType}。",
+    // QuickAddFoodSection
+    quickAddFoodTitle: "快速添加食物",
+    oatmeal: "燕麦片",
+    salad: "沙拉",
+    apple: "苹果",
+    milk: "牛奶",
+    more: "更多",
+    takePhoto: "拍照添加",
+    scanBarcode: "扫描条形码",
+    // NutritionSummarySection
+    nutritionSummaryTitle: "营养总结",
+    nutritionSummaryPlaceholder: "详细的营养总结图表将在此处显示。",
+    // RightSidebar
+    // MealPlanningCard
+    mealPlanningTitle: "膳食计划",
+    weeklyPlanTab: "周计划",
+    recipesTab: "食谱",
+    weekOf: "{date}周", // Note: Date format might need localization
+    viewAll: "查看全部",
+    createMealPlan: "创建膳食计划",
+    yourRecipes: "你的食谱",
+    addNewRecipe: "添加新食谱",
+    monday: "星期一",
+    tuesday: "星期二",
+    wednesday: "星期三",
+    // HealthMetricsCard
+    healthMetricsTitle: "健康指标",
+    bloodGlucose: "血糖",
+    bloodPressure: "血压",
+    weight: "体重",
+    statusSlightlyHigh: "略高",
+    statusNormal: "正常",
+    statusValueWithUnit: "{value} {unit}",
+    statusValueOnly: "{value}",
+    timeToday: "今天",
+    timeYesterday: "昨天",
   }
 };
+
+export type Translations = typeof translations.en;
 
 export default function NutriTrackDashboardPage() {
   const [isLoading, setIsLoading] = useState(false); // For global loading states if any
   // const [error, setError] = useState<string | null>(null); // For global errors
-  const { toast } = useToast();
+  // const { toast } = useToast(); // Not used currently
   const [language, setLanguage] = useState<'en' | 'zh'>('en');
   const currentTranslations = translations[language];
 
@@ -61,17 +188,17 @@ export default function NutriTrackDashboardPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <AppHeader language={language} onLanguageChange={setLanguage} userName="John Doe" />
+      <AppHeader language={language} onLanguageChange={setLanguage} userName="John Doe" translations={currentTranslations} />
       
       <div className="flex flex-1 flex-col md:flex-row overflow-hidden">
         {/* Left Sidebar */}
-        <LeftSidebar />
+        <LeftSidebar translations={currentTranslations} />
 
         {/* Main Content Area - takes remaining space and scrolls */}
-        <MainContentArea />
+        <MainContentArea translations={currentTranslations} />
 
         {/* Right Sidebar */}
-        <RightSidebar />
+        <RightSidebar translations={currentTranslations} />
       </div>
       
       {/* Global Loading Overlay Example */}

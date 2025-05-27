@@ -1,10 +1,11 @@
 
 "use client";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, PlusCircle } from 'lucide-react';
 import Image from 'next/image';
+import type { Translations } from '@/app/page';
 
 interface MealItem {
   id: string;
@@ -20,7 +21,7 @@ interface MealsData {
   breakfast: MealItem[];
   lunch: MealItem[];
   dinner: MealItem[];
-  snacks: MealItem[]; // Added snacks as per common structure, though not in UI with items
+  snacks: MealItem[]; 
 }
 
 const initialMockMeals: MealsData = {
@@ -40,20 +41,28 @@ const initialMockMeals: MealsData = {
   snacks: [],
 };
 
-type MealCategory = keyof MealsData;
+type MealCategoryKey = keyof MealsData;
 
-const mealTitles: Record<MealCategory, string> = {
-  breakfast: "Breakfast",
-  lunch: "Lunch",
-  dinner: "Dinner",
-  snacks: "Snacks",
-};
+interface TodaysMealsSectionProps {
+  translations: Translations;
+}
 
-export function TodaysMealsSection() {
+export function TodaysMealsSection({ translations }: TodaysMealsSectionProps) {
   const [currentDate, setCurrentDate] = useState(new Date(2023, 4, 15)); // Month is 0-indexed, so 4 is May
-  const [mealsData, setMealsData] = useState<MealsData>(initialMockMeals); // In a real app, this would be fetched
+  const [mealsData, setMealsData] = useState<MealsData>(initialMockMeals); 
+
+  const mealTitles: Record<MealCategoryKey, string> = {
+    breakfast: translations.breakfast,
+    lunch: translations.lunch,
+    dinner: translations.dinner,
+    snacks: translations.snacks,
+  };
 
   const formatDate = (date: Date) => {
+    // Basic formatting, consider date-fns for robust i18n
+    if (translations.kcalUnit === "千卡") { // Heuristic for Chinese
+        return date.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
     return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   };
 
@@ -61,14 +70,11 @@ export function TodaysMealsSection() {
     setCurrentDate(prevDate => {
       const newDate = new Date(prevDate);
       newDate.setDate(newDate.getDate() + offset);
-      // Here you would typically fetch data for the newDate
-      // For demo, we'll just keep the same mock data
-      // setMealsData(fetchMealsForDate(newDate)); 
       return newDate;
     });
   };
 
-  const getTotalCalories = (category: MealCategory) => {
+  const getTotalCalories = (category: MealCategoryKey) => {
     return mealsData[category].reduce((sum, item) => sum + parseInt(item.calories), 0);
   }
 
@@ -76,7 +82,7 @@ export function TodaysMealsSection() {
     <Card className="shadow-lg">
       <CardHeader className="pb-4">
         <div className="flex justify-between items-center">
-          <CardTitle className="text-lg">Today's Meals</CardTitle>
+          <CardTitle className="text-lg">{translations.todaysMealsTitle}</CardTitle>
           <div className="flex items-center gap-1 sm:gap-2">
             <Button variant="ghost" size="icon" onClick={() => changeDate(-1)} className="h-8 w-8">
               <ChevronLeft className="h-5 w-5" />
@@ -89,11 +95,11 @@ export function TodaysMealsSection() {
         </div>
       </CardHeader>
       <CardContent className="space-y-6">
-        {(Object.keys(mealsData) as MealCategory[]).filter(cat => cat !== 'snacks' || mealsData.snacks.length > 0).map(category => (
+        {(Object.keys(mealsData) as MealCategoryKey[]).filter(cat => cat !== 'snacks' || mealsData.snacks.length > 0).map(category => (
           <div key={category}>
             <div className="flex justify-between items-baseline mb-2">
               <h3 className="text-md font-semibold text-primary">{mealTitles[category]}</h3>
-              <span className="text-xs text-muted-foreground">{getTotalCalories(category)} kcal</span>
+              <span className="text-xs text-muted-foreground">{getTotalCalories(category)} {translations.kcalUnit}</span>
             </div>
             {mealsData[category].length > 0 ? (
               <div className="space-y-3">
@@ -102,22 +108,25 @@ export function TodaysMealsSection() {
                     <div className="flex items-center gap-3">
                       <Image src={item.iconUrl} alt={item.name} width={32} height={32} className="rounded-full" data-ai-hint={item.dataAiHint} />
                       <div>
-                        <p className="text-sm font-medium">{item.name}</p>
+                        {/* Item name is dynamic data, not from static translations */}
+                        <p className="text-sm font-medium">{item.name}</p> 
                         <p className="text-xs text-muted-foreground">{item.quantity}</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm font-semibold">{item.calories}</p>
+                      <p className="text-sm font-semibold">{item.calories.replace('kcal', translations.kcalUnit)}</p>
                       <p className="text-xs text-muted-foreground">{item.pfc}</p>
                     </div>
                   </Card>
                 ))}
               </div>
             ) : (
-              <p className="text-xs text-muted-foreground italic text-center py-2">No {mealTitles[category].toLowerCase()} logged yet.</p>
+              <p className="text-xs text-muted-foreground italic text-center py-2">
+                {translations.noMealsLogged.replace('{mealType}', mealTitles[category].toLowerCase())}
+              </p>
             )}
             <Button variant="outline" className="w-full mt-3 text-xs h-8 border-dashed hover:border-primary hover:text-primary text-muted-foreground hover:bg-accent">
-              <PlusCircle className="mr-1.5 h-3.5 w-3.5" /> Add Food {/* to {mealTitles[category]} - removed for brevity as in UI */}
+              <PlusCircle className="mr-1.5 h-3.5 w-3.5" /> {translations.addFood}
             </Button>
           </div>
         ))}
