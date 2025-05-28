@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { CalendarDays, PlusCircle, Utensils, Coffee, Sandwich, Fish, Leaf, Soup as SoupIcon, Drumstick } from 'lucide-react'; // Added icons
+import { CalendarDays, PlusCircle, Utensils, Coffee, Sandwich, Fish, Leaf, Soup as SoupIcon, Drumstick, Salad } from 'lucide-react'; // Added Salad icon
 import type { Translations } from '@/app/page';
 
 interface MealPlanningCardProps {
@@ -12,30 +12,30 @@ interface MealPlanningCardProps {
 
 export function MealPlanningCard({ translations }: MealPlanningCardProps) {
   const weeklyPlanData = [
-    { 
-      dayKey: 'monday', 
-      calories: '1,950 kcal', 
+    {
+      dayKey: 'monday',
+      calories: '1,950 kcal',
       mealIcons: [
-        { icon: Coffee, hint: 'breakfast beverage', color: 'bg-orange-100 dark:bg-orange-900/30 text-orange-500' }, 
-        { icon: Sandwich, hint: 'lunch meal', color: 'bg-sky-100 dark:bg-sky-900/30 text-sky-500' }, 
+        { icon: Coffee, hint: 'breakfast beverage', color: 'bg-orange-100 dark:bg-orange-900/30 text-orange-500' },
+        { icon: Sandwich, hint: 'lunch meal', color: 'bg-sky-100 dark:bg-sky-900/30 text-sky-500' },
         { icon: Fish, hint: 'dinner food', color: 'bg-teal-100 dark:bg-teal-900/30 text-teal-500' }
       ]
     },
-    { 
-      dayKey: 'tuesday', 
-      calories: '2,050 kcal', 
+    {
+      dayKey: 'tuesday',
+      calories: '2,050 kcal',
       mealIcons: [
-        { icon: Coffee, hint: 'healthy breakfast', color: 'bg-orange-100 dark:bg-orange-900/30 text-orange-500' }, 
-        { icon: Salad, hint: 'quick lunch', color: 'bg-lime-100 dark:bg-lime-900/30 text-lime-500' }, 
+        { icon: Coffee, hint: 'healthy breakfast', color: 'bg-orange-100 dark:bg-orange-900/30 text-orange-500' },
+        { icon: Salad, hint: 'quick lunch', color: 'bg-lime-100 dark:bg-lime-900/30 text-lime-500' },
         { icon: Drumstick, hint: 'light dinner', color: 'bg-red-100 dark:bg-red-900/30 text-red-500' }
       ]
     },
-    { 
-      dayKey: 'wednesday', 
-      calories: '1,850 kcal', 
+    {
+      dayKey: 'wednesday',
+      calories: '1,850 kcal',
       mealIcons: [
-        { icon: Coffee, hint: 'morning meal', color: 'bg-orange-100 dark:bg-orange-900/30 text-orange-500' }, 
-        { icon: SoupIcon, hint: 'midday food', color: 'bg-amber-100 dark:bg-amber-900/30 text-amber-500' }, 
+        { icon: Coffee, hint: 'morning meal', color: 'bg-orange-100 dark:bg-orange-900/30 text-orange-500' },
+        { icon: SoupIcon, hint: 'midday food', color: 'bg-amber-100 dark:bg-amber-900/30 text-amber-500' },
         { icon: Fish, hint: 'evening supper', color: 'bg-teal-100 dark:bg-teal-900/30 text-teal-500' }
       ]
     },
