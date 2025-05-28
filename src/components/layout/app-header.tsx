@@ -1,7 +1,7 @@
 
 "use client";
 import Link from 'next/link';
-import { Leaf, ChevronDown, Edit3, User } from 'lucide-react';
+import { Leaf, ChevronDown, Edit3, User, Globe } from 'lucide-react'; // Added Globe
 import { Button } from '@/components/ui/button';
 import { Avatar } from '@/components/ui/avatar';
 import {
@@ -32,8 +32,6 @@ export function AppHeader({
     window.open('/personal-statement', '_blank');
   };
 
-  const buttonText = currentLanguage === 'en' ? translations.switchToChineseButtonText : translations.switchToEnglishButtonText;
-
   return (
     <header className="bg-card shadow-sm sticky top-0 z-40 py-3">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between">
@@ -47,16 +45,18 @@ export function AppHeader({
         <div className="flex flex-col items-stretch w-full sm:w-auto sm:flex-row sm:items-center gap-3 mt-3 sm:mt-0">
           <Button
             variant="outline"
+            size="icon" // Changed to icon size
             onClick={onToggleLanguage}
-            className="h-9 text-xs sm:text-sm px-2 sm:px-3 w-full sm:w-auto min-w-[100px] sm:min-w-[110px]"
+            className="w-full sm:w-auto" // Adjusted width classes
             aria-label={currentLanguage === 'en' ? "Switch to Traditional Chinese" : "Switch to English"}
           >
-            {buttonText}
+            <Globe className="h-5 w-5" />
           </Button>
           <Button
             variant="outline"
+            size="default" // Changed to default size for h-10 consistency
             onClick={openPersonalStatementInNewWindow}
-            className="h-9 text-xs sm:text-sm px-2 sm:px-3 w-full sm:w-auto"
+            className="text-xs sm:text-sm w-full sm:w-auto"
             aria-label={translations.readPersonalStatement}
           >
             <Edit3 className="mr-1.5 h-4 w-4" />
