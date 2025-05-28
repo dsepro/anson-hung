@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
@@ -14,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'NutriTrack',
-  description: 'Analyze ingredients and track your nutrition.',
+  title: 'NutriTrack - Created and Designed by Anson Hung / 營養追蹤 - 由洪鉉鈴製作和設計',
+  description: 'Track your nutrition and plan meals with NutriTrack, designed by Anson Hung. / 追蹤您的營養並計劃膳食，由洪鉉鈴設計的營養追蹤。',
 };
 
 export default function RootLayout({

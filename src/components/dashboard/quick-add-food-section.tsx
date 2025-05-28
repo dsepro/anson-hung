@@ -2,7 +2,7 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Apple, Camera, Carrot, Milk, ScanLine, Wheat, PlusCircle } from 'lucide-react';
+import { Apple, Camera, Carrot, Milk, ScanLine, Wheat, PlusCircle, Drumstick, Leaf, Salad, CupSoda } from 'lucide-react';
 import type { Translations } from '@/app/page';
 
 interface QuickAddFoodSectionProps {
@@ -12,9 +12,13 @@ interface QuickAddFoodSectionProps {
 export function QuickAddFoodSection({ translations }: QuickAddFoodSectionProps) {
   const quickAddItems = [
     { id: 'oatmeal', icon: Wheat },
-    { id: 'salad', icon: Carrot }, 
+    { id: 'salad', icon: Salad }, 
     { id: 'apple', icon: Apple },
     { id: 'milk', icon: Milk },
+    { id: 'quickAddChickenBreast', icon: Drumstick },
+    { id: 'quickAddBrownRice', icon: Wheat },
+    { id: 'quickAddBroccoli', icon: Leaf },
+    { id: 'quickAddYogurt', icon: CupSoda },
   ];
 
   return (

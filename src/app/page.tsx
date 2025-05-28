@@ -14,8 +14,8 @@ export const translations = {
   en: {
     loadingText: "Loading Dashboard...",
     // AppHeader
-    nutriTrackTitle: "NutriTrack",
-    userNameDisplay: "Chan Tai Man", // User name
+    nutriTrackTitle: "NutriTrack - Created and Designed by Anson Hung",
+    userNameDisplay: "Chan Tai Man", 
     myAccount: "My Account",
     profile: "Profile",
     settings: "Settings",
@@ -35,10 +35,10 @@ export const translations = {
     personalStatementConclusionTitle: "Conclusion",
     personalStatementConclusionBody: "With my strong background in nutrition and a clear vision for the future, I believe I am well-suited for this program. I am eager to learn from the professionals at HKUSPACE and integrate their insights to promote better health and well-being in our communities.",
     personalStatementThanks: "Thank you for considering my application. I look forward to discussing my application and aspirations in more detail during an interview.",
-    closeButtonText: "Close", // Though dialog is removed, key can remain
+    closeButtonText: "Close", 
     // LeftSidebar
     chatWithDietitian: "Chat with Dietitian",
-    userConditionExample: "Type 2 Diabetes, Hypertension", // Added English for this
+    userConditionExample: "Type 2 Diabetes, Hypertension", 
     // DailyGoalsCard
     dailyGoalsTitle: "Daily Goals",
     calories: "Calories",
@@ -72,8 +72,12 @@ export const translations = {
     quickAddFoodTitle: "Quick Add Food",
     oatmeal: "Oatmeal",
     salad: "Salad",
-    // apple: "Apple", // Already in TodaysMealsSection names
+    apple: "Apple", 
     milk: "Milk",
+    quickAddChickenBreast: "Chicken Breast",
+    quickAddBrownRice: "Brown Rice",
+    quickAddBroccoli: "Broccoli",
+    quickAddYogurt: "Yogurt",
     more: "More",
     takePhoto: "Take Photo",
     scanBarcode: "Scan Barcode",
@@ -113,15 +117,15 @@ export const translations = {
     timeToday: "Today",
     timeYesterday: "Yesterday",
     // Language Selector (Now button)
-    language: "Language", // Generic key, actual button text is switchToChineseButtonText/switchToEnglishButtonText
+    language: "Language", 
     // Footer
     footerCredit: "This demo webpage was created and designed by Anson Hung for the application to Postgraduate Diploma in Human Nutrition and Postgraduate Diploma in Dietetics.",
   },
   zh: {
     loadingText: "正在載入儀表板...",
     // AppHeader
-    nutriTrackTitle: "營養追蹤",
-    userNameDisplay: "陳大文", // User name
+    nutriTrackTitle: "營養追蹤 - 由洪鉉鈴製作和設計",
+    userNameDisplay: "陳大文", 
     myAccount: "我的帳戶",
     profile: "個人資料",
     settings: "設定",
@@ -129,19 +133,19 @@ export const translations = {
     switchToEnglishButtonText: "English",
     readPersonalStatement: "請在此瀏覽我的個人自述",
     // Personal Statement Dialog (Titles for the statement itself are always English)
-    personalStatementDialogTitle: "個人自述", // This title is translated
-    personalStatementWhyTitle: "Why I would like to become a dietitian", // English Title
+    personalStatementDialogTitle: "個人自述", 
+    personalStatementWhyTitle: "Why I would like to become a dietitian", 
     personalStatementWhyBody: "Eating is something we do every day, yet food is far more than fuel—it's a fundamental component of well-being, a preventive measure against chronic diseases, and a gateway to better quality of life. By helping people make informed food choices, we can improve their wellbeing. In Hong Kong, the aging population poses a significant public health challenge, making effective nutrition strategies essential. As the demand for dietitians grows, I am eager to join this field, aiming to enhance health outcomes for individuals of all ages and support the community in making better dietary choices.",
-    personalStatementExperienceTitle: "Relevant experience and strength", // English Title
+    personalStatementExperienceTitle: "Relevant experience and strength", 
     personalStatementExperienceBody: "My past work and volunteer experience at hospitals and community centers has given me a deep understanding of the role of a dietitian in both clinical and community settings. Through these experiences, I have learned how dietitians assess nutritional needs, develop tailored plans, and support individuals in making healthier choices. This hands-on exposure has solidified my commitment to this profession.\nI possess a diverse set of relevant skills and strengths that are essential for becoming a dietitian. My strong communication skills enable me to convey complex nutritional information clearly and effectively, ensuring that patients understand their dietary needs and recommendations. I also excel in active listening, which allows me to truly understand patients’ concerns and preferences.",
-    personalStatementGoalsTitle: "My career goals", // English Title
+    personalStatementGoalsTitle: "My career goals", 
     personalStatementGoalsBody: "I am passionate about working on the front lines of healthcare to provide tailored dietary guidance that empowers individuals to make informed and sustainable changes. My goal is to offer patient-centered nutrition plans that consider each patient's medical condition, lifestyle, and cultural context. I also aim to take part in primary intervention strategies that reduce the incidence of preventable diseases through early nutritional support and public education. I am eager to develop outreach programs that promote food literacy, healthy eating habits, and community wellness. Moreover, I am enthusiastic about the growing role of digital health tools and artificial intelligence in dietetics. From personalized meal planning apps to predictive analytics for nutritional risk assessment, I see tremendous potential for technology to enhance care delivery.",
-    personalStatementReasonsTitle: "Reasons for applying for this course", // English Title
+    personalStatementReasonsTitle: "Reasons for applying for this course", 
     personalStatementReasonsBody: "I am drawn to this program for its excellent reputation in the field, as well as its emphasis on both academic and practical training. The opportunity to engage in a full-time placement in a hospital is particularly appealing. Training in local settings will benefit my long-term goal of practicing in Hong Kong by helping me understand the regional healthcare systems, patient expectations, and food cultures. This knowledge will enable me to provide more relevant and effective care in the future. Moreover, the part-time structure of the first year aligns well with my current professional commitments and gives me the flexibility to remain active in the field while deepening my academic knowledge.",
-    personalStatementConclusionTitle: "Conclusion", // English Title
+    personalStatementConclusionTitle: "Conclusion", 
     personalStatementConclusionBody: "With my strong background in nutrition and a clear vision for the future, I believe I am well-suited for this program. I am eager to learn from the professionals at HKUSPACE and integrate their insights to promote better health and well-being in our communities.",
-    personalStatementThanks: "Thank you for considering my application. I look forward to discussing my application and aspirations in more detail during an interview.", // English Text
-    closeButtonText: "關閉", // Though dialog is removed, key can remain
+    personalStatementThanks: "Thank you for considering my application. I look forward to discussing my application and aspirations in more detail during an interview.", 
+    closeButtonText: "關閉", 
     // LeftSidebar
     chatWithDietitian: "與營養師聊天",
     userConditionExample: "二型糖尿病，高血壓",
@@ -178,8 +182,12 @@ export const translations = {
     quickAddFoodTitle: "快速新增食物",
     oatmeal: "燕麥片",
     salad: "沙律",
-    // apple: "蘋果", // Already in TodaysMealsSection names
+    apple: "蘋果", 
     milk: "牛奶",
+    quickAddChickenBreast: "雞胸肉",
+    quickAddBrownRice: "糙米",
+    quickAddBroccoli: "西蘭花",
+    quickAddYogurt: "乳酪",
     more: "更多",
     takePhoto: "拍照新增",
     scanBarcode: "掃描條碼",
@@ -196,7 +204,7 @@ export const translations = {
     mealPlanningTitle: "膳食計劃",
     weeklyPlanTab: "週計劃",
     recipesTab: "食譜",
-    weekOf: "{date}週", // Example: "五月 15日週"
+    weekOf: "{date}週", 
     viewAll: "查看全部",
     createMealPlan: "建立膳食計劃",
     yourRecipes: "您的食譜",
@@ -219,7 +227,7 @@ export const translations = {
     timeToday: "今天",
     timeYesterday: "昨天",
     // Language Selector (Now button)
-    language: "語言", // Generic key, actual button text is switchToChineseButtonText/switchToEnglishButtonText
+    language: "語言", 
     // Footer
     footerCredit: "此示範用網頁由洪鉉鈴製作和設計 供報考人類營養學深造文憑/營養治療學深造文憑用",
   }
@@ -229,7 +237,7 @@ export type Translations = typeof translations.en;
 export type Language = keyof typeof translations;
 
 export default function NutriTrackDashboardPage() {
-  const [_isLoading, setIsLoading] = useState(false); // isLoading not actively used for a global spinner now
+  const [_isLoading, setIsLoading] = useState(false); 
   const [language, setLanguage] = useState<Language>('en');
   const currentTranslations = translations[language];
 
@@ -258,7 +266,6 @@ export default function NutriTrackDashboardPage() {
         currentLanguage={language}
         onToggleLanguage={toggleLanguage}
         userName={currentTranslations.userNameDisplay}
-        // userAvatar prop removed
         translations={currentTranslations}
       />
 
@@ -270,12 +277,6 @@ export default function NutriTrackDashboardPage() {
 
       <AppFooter translations={currentTranslations} />
 
-      {/* isLoading && ( // Global spinner can be re-enabled if needed
-        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50">
-          <Loader2 className="h-12 w-12 text-primary animate-spin" />
-          <p className="ml-4 text-lg text-primary">{currentTranslations.loadingText}</p>
-        </div>
-      )*/}
     </div>
   );
 }
