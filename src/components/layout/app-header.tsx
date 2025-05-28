@@ -1,9 +1,9 @@
 
 "use client";
 import Link from 'next/link';
-import { Leaf, ChevronDown, Edit3, User } from 'lucide-react'; 
+import { Leaf, ChevronDown, Edit3, User, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Avatar } from '@/components/ui/avatar'; 
+import { Avatar } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { Translations, Language } from '@/lib/translations'; 
+import type { Translations, Language } from '@/lib/translations';
 
 interface AppHeaderProps {
   currentLanguage: Language;
@@ -28,7 +28,7 @@ export function AppHeader({
   translations
 }: AppHeaderProps) {
 
-  const openPersonalStatement = () => {
+  const openPersonalStatementInNewWindow = () => {
     window.open('/personal-statement', '_blank');
   };
 
@@ -36,10 +36,10 @@ export function AppHeader({
 
   return (
     <header className="bg-card shadow-sm sticky top-0 z-40 h-auto sm:h-16 py-2 sm:py-0">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col sm:flex-row items-center justify-between">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col sm:flex-row items-start sm:items-center justify-between">
         <Link href="/" className="flex items-center gap-2 text-primary mb-2 sm:mb-0">
           <Leaf className="h-6 w-6 sm:h-7 sm:w-7" />
-          <span className="font-semibold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl whitespace-nowrap"> 
+          <span className="font-semibold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl whitespace-nowrap">
             {translations.nutriTrackTitle}
           </span>
         </Link>
@@ -56,7 +56,7 @@ export function AppHeader({
             </Button>
             <Button
               variant="outline"
-              onClick={openPersonalStatement}
+              onClick={openPersonalStatementInNewWindow}
               className="h-9 text-xs sm:text-sm px-2 sm:px-3 w-full sm:w-auto"
               aria-label={translations.readPersonalStatement}
             >
