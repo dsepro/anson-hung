@@ -62,6 +62,7 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
   const [mealsData, setMealsData] = useState<MealsData>(() => initialMockMeals(translations));
 
   useEffect(() => {
+    // Set date only on client-side to avoid hydration mismatch
     setCurrentDate(new Date());
   }, []);
 
@@ -103,6 +104,7 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
   }
 
   if (!currentDate) {
+    // Render a placeholder or null during server rendering or before client-side effect runs
     return null; 
   }
 
@@ -111,13 +113,13 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
       <CardHeader className="pb-4">
         <div className="flex justify-between items-center">
           <CardTitle className="text-base sm:text-lg">{translations.todaysMealsTitle}</CardTitle>
-          <div className="flex items-center gap-1 sm:gap-2">
-            <Button variant="ghost" size="icon" onClick={() => changeDate(-1)} className="h-8 w-8">
-              <ChevronLeft className="h-5 w-5" />
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" size="icon" onClick={() => changeDate(-1)} className="h-7 w-7">
+              <ChevronLeft className="h-4 w-4" />
             </Button>
             <span className="text-xs sm:text-sm font-medium min-w-[110px] sm:min-w-[150px] text-center">{formatDate(currentDate)}</span>
-            <Button variant="ghost" size="icon" onClick={() => changeDate(1)} className="h-8 w-8">
-              <ChevronRight className="h-5 w-5" />
+            <Button variant="ghost" size="icon" onClick={() => changeDate(1)} className="h-7 w-7">
+              <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
         </div>
@@ -169,3 +171,4 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
 
 
     
+

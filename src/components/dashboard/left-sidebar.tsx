@@ -45,12 +45,12 @@ export function LeftSidebar({ translations }: LeftSidebarProps) {
 
   return (
     <aside className="w-full md:w-1/4 lg:w-1/5 xl:w-[22%] md:flex-shrink-0 p-4 space-y-6 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto bg-card md:border-r border-border/60">
-      <UserProfileCard user={mockUser} />
+      <UserProfileCard user={mockUser} translations={translations} />
       <DailyGoalsCard goals={translatedGoals} translations={translations} />
       <DietitianRecommendationsCard 
         recommendations={translatedRecommendations} 
         translations={translations} />
-      <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+      <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground mt-4">
         <MessageSquare className="mr-2 h-4 w-4" />
         {translations.chatWithDietitian}
       </Button>
@@ -61,4 +61,5 @@ export function LeftSidebar({ translations }: LeftSidebarProps) {
     
 
     
+
 
