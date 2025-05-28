@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Apple, Camera, Carrot, Milk, ScanLine, Wheat, PlusCircle, Drumstick, Leaf, Salad, CupSoda } from 'lucide-react';
-import type { Translations } from '@/lib/translations'; // Updated import
+import type { Translations } from '@/lib/translations'; 
 
 interface QuickAddFoodSectionProps {
   translations: Translations;
@@ -24,7 +24,7 @@ export function QuickAddFoodSection({ translations }: QuickAddFoodSectionProps) 
   return (
     <Card className="shadow-lg">
       <CardHeader className="pb-4">
-        <CardTitle className="text-lg">{translations.quickAddFoodTitle}</CardTitle>
+        <CardTitle className="text-base sm:text-lg">{translations.quickAddFoodTitle}</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 mb-4">
@@ -40,10 +40,10 @@ export function QuickAddFoodSection({ translations }: QuickAddFoodSectionProps) 
             </Button>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-10">
+          <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-10 text-xs sm:text-sm">
             <Camera className="mr-2 h-4 w-4" /> {translations.takePhoto}
           </Button>
-          <Button className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground h-10">
+          <Button className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground h-10 text-xs sm:text-sm">
             <ScanLine className="mr-2 h-4 w-4" /> {translations.scanBarcode}
           </Button>
         </div>

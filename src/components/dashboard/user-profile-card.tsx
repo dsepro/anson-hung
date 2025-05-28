@@ -1,15 +1,13 @@
 
 "use client";
-import { Avatar } from '@/components/ui/avatar'; // Removed AvatarImage, AvatarFallback
+import { Avatar } from '@/components/ui/avatar'; 
 import { Card, CardContent } from '@/components/ui/card';
-import { User } from 'lucide-react'; // Added User icon
+import { User } from 'lucide-react'; 
 
 interface UserProfileCardProps {
   user: {
     name: string;
     condition: string;
-    // avatarUrl?: string; // No longer used for display
-    // avatarFallback: string; // No longer used for display
   };
 }
 
@@ -21,7 +19,7 @@ export function UserProfileCard({ user }: UserProfileCardProps) {
           <User className="h-7 w-7" />
         </Avatar>
         <div>
-          <h3 className="text-md font-semibold">{user.name}</h3>
+          <h3 className="text-sm sm:text-base font-semibold">{user.name}</h3>
           <p className="text-xs text-muted-foreground">{user.condition}</p>
         </div>
       </CardContent>

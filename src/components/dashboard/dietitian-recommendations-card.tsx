@@ -2,7 +2,7 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Lightbulb } from 'lucide-react';
-import type { Translations } from '@/lib/translations'; // Updated import
+import type { Translations } from '@/lib/translations'; 
 
 interface DietitianRecommendationsCardProps {
   recommendations: Array<{ text: string; styleKey: 'green' | 'blue' | 'yellow' }>;
@@ -25,7 +25,7 @@ export function DietitianRecommendationsCard({ recommendations, translations }: 
   return (
     <Card className="shadow-md">
       <CardHeader className="pb-3 pt-5">
-        <CardTitle className="text-md">{translations.dietitianRecommendationsTitle}</CardTitle>
+        <CardTitle className="text-sm sm:text-base">{translations.dietitianRecommendationsTitle}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-2">
         {recommendations.map((rec, index) => (

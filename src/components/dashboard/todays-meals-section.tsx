@@ -15,7 +15,7 @@ import {
   Soup,
   Fish,
 } from 'lucide-react';
-import type { Translations, Language } from '@/lib/translations'; // Updated import
+import type { Translations, Language } from '@/lib/translations'; 
 
 interface MealItem {
   id: string;
@@ -110,12 +110,12 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
     <Card className="shadow-lg">
       <CardHeader className="pb-4">
         <div className="flex justify-between items-center">
-          <CardTitle className="text-lg">{translations.todaysMealsTitle}</CardTitle>
+          <CardTitle className="text-base sm:text-lg">{translations.todaysMealsTitle}</CardTitle>
           <div className="flex items-center gap-1 sm:gap-2">
             <Button variant="ghost" size="icon" onClick={() => changeDate(-1)} className="h-8 w-8">
               <ChevronLeft className="h-5 w-5" />
             </Button>
-            <span className="text-sm font-medium min-w-[110px] sm:min-w-[150px] text-center">{formatDate(currentDate)}</span>
+            <span className="text-xs sm:text-sm font-medium min-w-[110px] sm:min-w-[150px] text-center">{formatDate(currentDate)}</span>
             <Button variant="ghost" size="icon" onClick={() => changeDate(1)} className="h-8 w-8">
               <ChevronRight className="h-5 w-5" />
             </Button>
@@ -126,7 +126,7 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
         {(Object.keys(mealsData) as MealCategoryKey[]).filter(cat => cat !== 'snacks' || mealsData.snacks.length > 0).map(category => (
           <div key={category}>
             <div className="flex justify-between items-baseline mb-2">
-              <h3 className="text-md font-semibold text-primary">{mealTitles[category]}</h3>
+              <h3 className="text-sm sm:text-base font-semibold text-primary">{mealTitles[category]}</h3>
               <span className="text-xs text-muted-foreground">{getTotalCalories(category)} {translations.kcalUnit}</span>
             </div>
             {mealsData[category].length > 0 ? (
@@ -140,12 +140,12 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
                           <IconComponent className="h-5 w-5 text-primary" />
                         </div>
                         <div>
-                          <p className="text-sm font-medium">{translations[item.nameKey] || item.nameKey}</p>
+                          <p className="text-xs sm:text-sm font-medium">{translations[item.nameKey] || item.nameKey}</p>
                           <p className="text-xs text-muted-foreground">{item.quantity}</p>
                         </div>
                       </div>
                       <div className="text-right ml-2">
-                        <p className="text-sm font-semibold">{item.calories.replace('kcal', translations.kcalUnit)}</p>
+                        <p className="text-xs sm:text-sm font-semibold">{item.calories.replace('kcal', translations.kcalUnit)}</p>
                         <p className="text-xs text-muted-foreground">{item.pfc}</p>
                       </div>
                     </Card>

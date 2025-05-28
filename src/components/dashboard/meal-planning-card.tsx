@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CalendarDays, PlusCircle, Utensils, Coffee, Sandwich, Fish, Leaf, Soup as SoupIcon, Drumstick, Salad } from 'lucide-react'; 
-import type { Translations } from '@/lib/translations'; // Updated import
+import type { Translations } from '@/lib/translations'; 
 
 interface MealPlanningCardProps {
   translations: Translations;
@@ -57,7 +57,7 @@ export function MealPlanningCard({ translations }: MealPlanningCardProps) {
   return (
     <Card className="shadow-md">
       <CardHeader className="pb-3 pt-5">
-        <CardTitle className="text-md">{translations.mealPlanningTitle}</CardTitle>
+        <CardTitle className="text-sm sm:text-base">{translations.mealPlanningTitle}</CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="weekly" className="w-full">
@@ -77,7 +77,7 @@ export function MealPlanningCard({ translations }: MealPlanningCardProps) {
             {weeklyPlanData.map(plan => (
               <div key={plan.dayKey} className="flex items-center justify-between p-2.5 rounded-md bg-card hover:bg-secondary/10 border border-border/60">
                 <div>
-                  <p className="text-sm font-medium">{translations[plan.dayKey as keyof Translations]}</p>
+                  <p className="text-xs sm:text-sm font-medium">{translations[plan.dayKey as keyof Translations]}</p>
                   <div className="flex gap-1.5 mt-1.5">
                     {plan.mealIcons.map((mealIcon, idx) => {
                       const IconComponent = mealIcon.icon;
@@ -92,7 +92,7 @@ export function MealPlanningCard({ translations }: MealPlanningCardProps) {
                 <span className="text-xs text-muted-foreground">{plan.calories.replace('kcal', translations.kcalUnit)}</span>
               </div>
             ))}
-            <Button className="w-full mt-3 bg-primary hover:bg-primary/90 text-primary-foreground text-sm h-9">
+            <Button className="w-full mt-3 bg-primary hover:bg-primary/90 text-primary-foreground text-xs sm:text-sm h-9">
               <PlusCircle className="mr-2 h-4 w-4" /> {translations.createMealPlan}
             </Button>
           </TabsContent>
@@ -109,13 +109,13 @@ export function MealPlanningCard({ translations }: MealPlanningCardProps) {
                         <IconComponent className="h-7 w-7 text-muted-foreground" />
                     </div>
                     <div>
-                        <p className="text-sm font-medium">{recipe.name}</p>
+                        <p className="text-xs sm:text-sm font-medium">{recipe.name}</p>
                         <p className="text-xs text-muted-foreground">{recipe.calories.replace('kcal', translations.kcalUnit)}</p>
                     </div>
                  </div>
                 );
             })}
-             <Button variant="outline" className="w-full mt-3 text-sm h-9 border-primary/50 text-primary hover:bg-primary/10 hover:text-primary">
+             <Button variant="outline" className="w-full mt-3 text-xs sm:text-sm h-9 border-primary/50 text-primary hover:bg-primary/10 hover:text-primary">
               <PlusCircle className="mr-2 h-4 w-4" /> {translations.addNewRecipe}
             </Button>
           </TabsContent>

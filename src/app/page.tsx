@@ -31,7 +31,7 @@ export default function NutriTrackDashboardPage() {
     return (
         <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50">
             <Loader2 className="h-12 w-12 text-primary animate-spin" />
-            <p className="ml-4 text-lg text-primary">{translations.en.loadingText}</p> {/* Default to English for initial load */}
+            <p className="ml-4 text-base sm:text-lg text-primary">{translations.en.loadingText}</p> {/* Default to English for initial load */}
         </div>
     );
   }

@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import type { Translations } from "@/app/page";
+import type { Translations } from '@/lib/translations';
 
 interface PersonalStatementDisplayProps {
   isOpen: boolean;
@@ -37,16 +37,15 @@ export function PersonalStatementDisplay({ isOpen, onClose, translations }: Pers
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-2xl md:max-w-3xl lg:max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
         <DialogHeader className="flex-shrink-0">
-          <DialogTitle className="text-2xl font-bold text-primary">
+          <DialogTitle className="text-xl sm:text-2xl font-bold text-primary">
             {translations.personalStatementDialogTitle}
           </DialogTitle>
         </DialogHeader>
-        {/* Removed h-0 from ScrollArea's className */}
         <ScrollArea className="flex-grow min-h-0"> 
           <div className="space-y-6 py-4 px-2 sm:px-4 text-foreground/90 leading-relaxed">
             {statementSections.map(section => (
               <div key={section.titleKey}>
-                <h2 className="text-lg font-semibold text-primary mb-2">
+                <h2 className="text-base sm:text-lg font-semibold text-primary mb-2">
                   {translations[section.titleKey]}
                 </h2>
                 {translations[section.bodyKey].split('\n').map((paragraph, index) => (

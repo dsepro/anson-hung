@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Droplets, HeartPulse, Scale, ArrowRight } from 'lucide-react';
-import type { Translations } from '@/lib/translations'; // Updated import
+import type { Translations } from '@/lib/translations'; 
 
 interface Metric {
   id: string;
@@ -44,7 +44,7 @@ export function HealthMetricsCard({ translations }: HealthMetricsCardProps) {
   return (
     <Card className="shadow-md">
       <CardHeader className="flex flex-row items-center justify-between pb-2 pt-5">
-        <CardTitle className="text-md">{translations.healthMetricsTitle}</CardTitle>
+        <CardTitle className="text-sm sm:text-base">{translations.healthMetricsTitle}</CardTitle>
         <Button variant="link" size="sm" className="text-xs h-auto p-0 text-primary hover:text-primary/80">{translations.viewAll} <ArrowRight className="ml-1 h-3 w-3"/></Button>
       </CardHeader>
       <CardContent className="space-y-3">
@@ -64,13 +64,13 @@ export function HealthMetricsCard({ translations }: HealthMetricsCardProps) {
             <div className="flex items-start justify-between mb-1">
               <div className="flex items-center gap-2">
                 <metric.icon className="h-4 w-4 text-primary mt-0.5" />
-                <span className="text-sm font-medium">{translations[metric.translationKey]}</span>
+                <span className="text-xs sm:text-sm font-medium">{translations[metric.translationKey]}</span>
               </div>
               <span className="text-xs text-muted-foreground">{translations[metric.timeKey]}</span>
             </div>
             <div className="flex items-baseline justify-between mt-1">
                 <div>
-                    <span className="text-xl font-bold">{metric.value}</span>
+                    <span className="text-lg sm:text-xl font-bold">{metric.value}</span>
                     {metric.unit && <span className="text-xs text-muted-foreground ml-0.5">{metric.unit}</span>}
                 </div>
                 {metric.change && metric.changeStyle && metric.id !== 'weight' && ( // Don't show change separately for weight if it's in status

@@ -2,7 +2,7 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart as BarChartIcon } from 'lucide-react'; 
-import type { Translations } from '@/lib/translations'; // Updated import
+import type { Translations } from '@/lib/translations'; 
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { ChartConfig, ChartContainer, ChartTooltipContent } from '@/components/ui/chart';
 
@@ -43,7 +43,7 @@ export function NutritionSummarySection({ translations }: NutritionSummarySectio
   return (
     <Card className="shadow-lg">
       <CardHeader>
-        <CardTitle className="text-lg flex items-center">
+        <CardTitle className="text-base sm:text-lg flex items-center">
           <BarChartIcon className="mr-2 h-5 w-5 text-primary" />
           {translations.nutritionSummaryTitle}
         </CardTitle>
@@ -93,7 +93,7 @@ export function NutritionSummarySection({ translations }: NutritionSummarySectio
         ) : (
            <div className="text-center py-10">
             <BarChartIcon className="h-12 w-12 text-muted-foreground mx-auto mb-2" />
-            <p className="text-sm text-muted-foreground">No nutrition data to display.</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">No nutrition data to display.</p>
            </div>
         )}
       </CardContent>
