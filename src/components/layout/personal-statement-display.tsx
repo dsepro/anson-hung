@@ -41,7 +41,8 @@ export function PersonalStatementDisplay({ isOpen, onClose, translations }: Pers
             {translations.personalStatementDialogTitle}
           </DialogTitle>
         </DialogHeader>
-        <ScrollArea className="flex-grow min-h-0 h-0"> {/* Added h-0 */}
+        {/* Removed h-0 from ScrollArea's className */}
+        <ScrollArea className="flex-grow min-h-0"> 
           <div className="space-y-6 py-4 px-2 sm:px-4 text-foreground/90 leading-relaxed">
             {statementSections.map(section => (
               <div key={section.titleKey}>
@@ -62,7 +63,7 @@ export function PersonalStatementDisplay({ isOpen, onClose, translations }: Pers
              </div>
           </div>
         </ScrollArea>
-        <DialogFooter className="mt-auto pt-4 border-t flex-shrink-0"> {/* Added flex-shrink-0 */}
+        <DialogFooter className="mt-auto pt-4 border-t flex-shrink-0">
           <DialogClose asChild>
             <Button type="button" variant="outline" onClick={onClose}>
               {translations.closeButtonText}
@@ -73,4 +74,3 @@ export function PersonalStatementDisplay({ isOpen, onClose, translations }: Pers
     </Dialog>
   );
 }
-
