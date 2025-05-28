@@ -51,7 +51,7 @@ export function AppHeader({
             aria-label={currentLanguage === 'en' ? "Switch to Traditional Chinese" : "Switch to English"}
           >
             <Globe className="mr-1.5 h-4 w-4" />
-            {currentLanguage === 'en' ? translations.switchToChineseButtonText : translations.switchToEnglishButtonText}
+            {currentLanguage === 'en' ? translations.languageShortZH : translations.languageShortEN}
           </Button>
           <Button
             variant="secondary"
