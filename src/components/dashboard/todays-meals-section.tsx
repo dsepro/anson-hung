@@ -15,7 +15,6 @@ import {
   Soup,
   Fish,
 } from 'lucide-react';
-// import Image from 'next/image'; // Removed Image import
 import type { Translations, Language } from '@/app/page';
 
 interface MealItem {
@@ -24,7 +23,7 @@ interface MealItem {
   quantity: string;
   calories: string;
   pfc: string; // Protein, Fat, Carbs
-  icon: React.ElementType; // Changed from iconUrl to icon ElementType
+  icon: React.ElementType; 
 }
 
 interface MealsData {
@@ -104,7 +103,7 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
   }
 
   if (!currentDate) {
-    return null;
+    return null; 
   }
 
   return (
@@ -137,7 +136,7 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
                   return (
                     <Card key={item.id} className="p-3 flex items-center justify-between bg-card hover:shadow-sm transition-shadow border border-border/70">
                       <div className="flex items-center gap-3">
-                        <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                        <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                           <IconComponent className="h-5 w-5 text-primary" />
                         </div>
                         <div>
@@ -145,7 +144,7 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
                           <p className="text-xs text-muted-foreground">{item.quantity}</p>
                         </div>
                       </div>
-                      <div className="text-right">
+                      <div className="text-right ml-2">
                         <p className="text-sm font-semibold">{item.calories.replace('kcal', translations.kcalUnit)}</p>
                         <p className="text-xs text-muted-foreground">{item.pfc}</p>
                       </div>
@@ -167,3 +166,4 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
     </Card>
   );
 }
+

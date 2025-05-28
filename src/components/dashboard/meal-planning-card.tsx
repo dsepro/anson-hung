@@ -3,8 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { CalendarDays, PlusCircle, Utensils } from 'lucide-react';
-import Image from 'next/image';
+import { CalendarDays, PlusCircle, Utensils, Coffee, Sandwich, Fish, Leaf, Soup as SoupIcon, Drumstick } from 'lucide-react'; // Added icons
 import type { Translations } from '@/app/page';
 
 interface MealPlanningCardProps {
@@ -13,15 +12,39 @@ interface MealPlanningCardProps {
 
 export function MealPlanningCard({ translations }: MealPlanningCardProps) {
   const weeklyPlanData = [
-    { dayKey: 'monday', calories: '1,950 kcal', mealThumbnails: ['https://placehold.co/20x20/A8D5BA/333.png?text=B', 'https://placehold.co/20x20/FFDDA2/333.png?text=L', 'https://placehold.co/20x20/C5E1A5/333.png?text=D'] , dataAiHints: ['breakfast fruit', 'lunch meal', 'dinner food']},
-    { dayKey: 'tuesday', calories: '2,050 kcal', mealThumbnails: ['https://placehold.co/20x20/ADD8E6/333.png?text=B', 'https://placehold.co/20x20/E6B980/333.png?text=L', 'https://placehold.co/20x20/FFABAB/333.png?text=D'] , dataAiHints: ['healthy breakfast', 'quick lunch', 'light dinner']},
-    { dayKey: 'wednesday', calories: '1,850 kcal', mealThumbnails: ['https://placehold.co/20x20/FFCC80/333.png?text=B', 'https://placehold.co/20x20/A8D5BA/333.png?text=L', 'https://placehold.co/20x20/FFDDA2/333.png?text=D'] , dataAiHints: ['morning meal', 'midday food', 'evening supper']},
+    { 
+      dayKey: 'monday', 
+      calories: '1,950 kcal', 
+      mealIcons: [
+        { icon: Coffee, hint: 'breakfast beverage', color: 'bg-orange-100 dark:bg-orange-900/30 text-orange-500' }, 
+        { icon: Sandwich, hint: 'lunch meal', color: 'bg-sky-100 dark:bg-sky-900/30 text-sky-500' }, 
+        { icon: Fish, hint: 'dinner food', color: 'bg-teal-100 dark:bg-teal-900/30 text-teal-500' }
+      ]
+    },
+    { 
+      dayKey: 'tuesday', 
+      calories: '2,050 kcal', 
+      mealIcons: [
+        { icon: Coffee, hint: 'healthy breakfast', color: 'bg-orange-100 dark:bg-orange-900/30 text-orange-500' }, 
+        { icon: Salad, hint: 'quick lunch', color: 'bg-lime-100 dark:bg-lime-900/30 text-lime-500' }, 
+        { icon: Drumstick, hint: 'light dinner', color: 'bg-red-100 dark:bg-red-900/30 text-red-500' }
+      ]
+    },
+    { 
+      dayKey: 'wednesday', 
+      calories: '1,850 kcal', 
+      mealIcons: [
+        { icon: Coffee, hint: 'morning meal', color: 'bg-orange-100 dark:bg-orange-900/30 text-orange-500' }, 
+        { icon: SoupIcon, hint: 'midday food', color: 'bg-amber-100 dark:bg-amber-900/30 text-amber-500' }, 
+        { icon: Fish, hint: 'evening supper', color: 'bg-teal-100 dark:bg-teal-900/30 text-teal-500' }
+      ]
+    },
   ];
 
   const mockRecipesDataRaw = [
-      { id: 'r1', nameKey: 'recipeChickenStirFry', calories: '450 kcal', image: 'https://placehold.co/80x60/C5E1A5/333.png', dataAiHint: 'chicken stirfry' },
-      { id: 'r2', nameKey: 'recipeQuinoaSalad', calories: '380 kcal', image: 'https://placehold.co/80x60/FFDDA2/333.png', dataAiHint: 'quinoa salad' },
-      { id: 'r3', nameKey: 'recipeLentilSoup', calories: '320 kcal', image: 'https://placehold.co/80x60/FFCC80/333.png', dataAiHint: 'lentil soup' },
+      { id: 'r1', nameKey: 'recipeChickenStirFry', calories: '450 kcal', icon: Drumstick, dataAiHint: 'chicken stirfry' },
+      { id: 'r2', nameKey: 'recipeQuinoaSalad', calories: '380 kcal', icon: Leaf, dataAiHint: 'quinoa salad' }, // Changed icon to Leaf for Salad
+      { id: 'r3', nameKey: 'recipeLentilSoup', calories: '320 kcal', icon: SoupIcon, dataAiHint: 'lentil soup' },
   ];
 
   const translatedRecipesData = mockRecipesDataRaw.map(recipe => ({
@@ -29,7 +52,7 @@ export function MealPlanningCard({ translations }: MealPlanningCardProps) {
     name: translations[recipe.nameKey as keyof Translations] || recipe.nameKey,
   }));
 
-  const weekDateString = translations.language === 'zh' ? "五月 15日" : "May 15";
+  const weekDateString = translations.language === 'zh' ? "五月 15日" : "May 15"; // This should ideally be dynamic based on current date
 
   return (
     <Card className="shadow-md">
@@ -55,10 +78,15 @@ export function MealPlanningCard({ translations }: MealPlanningCardProps) {
               <div key={plan.dayKey} className="flex items-center justify-between p-2.5 rounded-md bg-card hover:bg-secondary/10 border border-border/60">
                 <div>
                   <p className="text-sm font-medium">{translations[plan.dayKey as keyof Translations]}</p>
-                  <div className="flex gap-1 mt-1">
-                    {plan.mealThumbnails.map((thumb, idx) => (
-                        <Image key={idx} src={thumb} alt="meal thumbnail" width={18} height={18} className="rounded-full" data-ai-hint={plan.dataAiHints[idx]} />
-                    ))}
+                  <div className="flex gap-1.5 mt-1.5">
+                    {plan.mealIcons.map((mealIcon, idx) => {
+                      const IconComponent = mealIcon.icon;
+                      return (
+                        <div key={idx} className={`h-5 w-5 rounded-full flex items-center justify-center ${mealIcon.color}`} data-ai-hint={mealIcon.hint}>
+                           <IconComponent className="h-3 w-3" />
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
                 <span className="text-xs text-muted-foreground">{plan.calories.replace('kcal', translations.kcalUnit)}</span>
@@ -73,15 +101,20 @@ export function MealPlanningCard({ translations }: MealPlanningCardProps) {
                 <h4 className="text-xs font-medium text-muted-foreground">{translations.yourRecipes}</h4>
                 <Button variant="link" size="sm" className="text-xs h-auto p-0 text-primary hover:text-primary/80">{translations.viewAll}</Button>
             </div>
-            {translatedRecipesData.map(recipe => (
+            {translatedRecipesData.map(recipe => {
+                 const IconComponent = recipe.icon;
+                 return (
                  <div key={recipe.id} className="flex items-center gap-3 p-2.5 rounded-md bg-card hover:bg-secondary/10 border border-border/60">
-                    <Image src={recipe.image} alt={recipe.name} width={60} height={45} className="rounded-md object-cover" data-ai-hint={recipe.dataAiHint} />
+                    <div className="h-12 w-16 rounded-md bg-muted flex items-center justify-center" data-ai-hint={recipe.dataAiHint}>
+                        <IconComponent className="h-7 w-7 text-muted-foreground" />
+                    </div>
                     <div>
                         <p className="text-sm font-medium">{recipe.name}</p>
                         <p className="text-xs text-muted-foreground">{recipe.calories.replace('kcal', translations.kcalUnit)}</p>
                     </div>
                  </div>
-            ))}
+                );
+            })}
              <Button variant="outline" className="w-full mt-3 text-sm h-9 border-primary/50 text-primary hover:bg-primary/10 hover:text-primary">
               <PlusCircle className="mr-2 h-4 w-4" /> {translations.addNewRecipe}
             </Button>
@@ -91,5 +124,4 @@ export function MealPlanningCard({ translations }: MealPlanningCardProps) {
     </Card>
   );
 }
-
     
