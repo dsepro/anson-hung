@@ -6,14 +6,14 @@ export const translations = {
     language: "en", // Added to help determine UI language for personal statement page button
     loadingText: "Loading Dashboard...",
     // AppHeader
-    nutriTrackTitle: "NutriTrack - Created and Designed by Anson Hung",
+    nutriTrackTitle: "NutriTrack - by Anson Hung",
     userNameDisplay: "Chan Tai Man",
     myAccount: "My Account",
     profile: "Profile",
     settings: "Settings",
     logOut: "Log out",
     switchToChineseButtonText: "繁體中文",
-    readPersonalStatement: "Read My Personal Statement Here",
+    readPersonalStatement: "Personal Statement",
     // Personal Statement Dialog/Page
     personalStatementDialogTitle: "Personal Statement", // Used if it were a dialog title
     personalStatementWhyTitle: "Why I would like to become a dietitian",
@@ -115,14 +115,14 @@ export const translations = {
     language: "zh", // Added to help determine UI language for personal statement page button
     loadingText: "正在載入儀表板...",
     // AppHeader
-    nutriTrackTitle: "營養追蹤 - 由洪鉉鈴製作和設計",
+    nutriTrackTitle: "營養追蹤 - 洪鉉鈴製作",
     userNameDisplay: "陳大文",
     myAccount: "我的帳戶",
     profile: "個人資料",
     settings: "設定",
     logOut: "登出",
     switchToEnglishButtonText: "English",
-    readPersonalStatement: "請在此瀏覽我的個人自述",
+    readPersonalStatement: "個人自述",
     // Personal Statement Dialog/Page
     personalStatementDialogTitle: "個人自述", // Used if it were a dialog title
     personalStatementWhyTitle: "Why I would like to become a dietitian", 
@@ -224,3 +224,4 @@ export const translations = {
 
 export type Translations = typeof translations.en;
 export type Language = keyof typeof translations;
+
