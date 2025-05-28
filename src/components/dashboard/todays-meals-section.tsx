@@ -1,6 +1,6 @@
 
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; // Added useEffect
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, PlusCircle } from 'lucide-react';
@@ -50,14 +50,17 @@ interface TodaysMealsSectionProps {
 }
 
 export function TodaysMealsSection({ translations, language }: TodaysMealsSectionProps) {
-  const [currentDate, setCurrentDate] = useState(new Date(2023, 4, 15)); // Month is 0-indexed, so 4 is May
+  const [currentDate, setCurrentDate] = useState<Date | null>(null); // Initialize with null
   // Initialize mealsData using translations
   const [mealsData, setMealsData] = useState<MealsData>(() => initialMockMeals(translations)); 
 
+  useEffect(() => {
+    // Set current date only on the client side to avoid hydration mismatch
+    setCurrentDate(new Date());
+  }, []);
+  
   // Update mealsData if translations change (e.g., language switch)
-  // This is important if initialMockMeals relies on translations for keys, though here it's for values
-  // For this specific case where we translate names, we need to rebuild if language changes
-  useState(() => {
+  useEffect(() => { // Changed from useState to useEffect
      setMealsData(initialMockMeals(translations));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [translations]);
@@ -70,7 +73,8 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
     snacks: translations.snacks,
   };
 
-  const formatDate = (date: Date) => {
+  const formatDate = (date: Date | null) => {
+    if (!date) return ""; // Handle null case
     if (language === 'zh') {
         return date.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' });
     }
@@ -79,6 +83,7 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
 
   const changeDate = (offset: number) => {
     setCurrentDate(prevDate => {
+      if (!prevDate) return null; // Should not happen if initialized correctly
       const newDate = new Date(prevDate);
       newDate.setDate(newDate.getDate() + offset);
       // Here you would typically fetch new meal data for the newDate
@@ -92,6 +97,13 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
         const calValue = parseInt(item.calories.replace(translations.kcalUnit, '').replace('kcal', ''));
         return sum + (isNaN(calValue) ? 0 : calValue);
     }, 0);
+  }
+
+  if (!currentDate) {
+    // You might want to render a loading state or null here
+    // until the date is set on the client.
+    // For simplicity, returning null for now.
+    return null; 
   }
 
   return (
@@ -149,6 +161,3 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
     </Card>
   );
 }
-
-
-    
