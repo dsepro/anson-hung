@@ -1,12 +1,14 @@
 
 // src/app/personal-statement/page.tsx
-import { translations } from '@/lib/translations'; // Import translations from the new shared file
-import { ScrollArea } from "@/components/ui/scroll-area"; 
+import Link from 'next/link';
+import { translations } from '@/lib/translations'; 
+import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
 
 export default function PersonalStatementPage() {
   // Personal statement content and its titles are always displayed in English
-  // The main page title for this route ("Personal Statement") comes from metadata in layout.tsx
   const statementContent = translations['en']; 
+  const uiTranslations = translations[translations.en.language === 'en' ? 'en' : 'zh']; // For button text
 
   const statementSections = [
     { titleKey: 'personalStatementWhyTitle', bodyKey: 'personalStatementWhyBody' },
@@ -14,16 +16,19 @@ export default function PersonalStatementPage() {
     { titleKey: 'personalStatementGoalsTitle', bodyKey: 'personalStatementGoalsBody' },
     { titleKey: 'personalStatementReasonsTitle', bodyKey: 'personalStatementReasonsBody' },
     { titleKey: 'personalStatementConclusionTitle', bodyKey: 'personalStatementConclusionBody' },
-  ] as const; // Use 'as const' for better type inference on keys
+  ] as const; 
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-3xl">
-      {/* The H1 title for the page itself is "Personal Statement", set in layout metadata */}
-      {/* If a dynamic title was needed here from translations, it would be:
-          <h1 className="text-3xl font-bold text-primary mb-8 text-center">
-            {statementContent.personalStatementDialogTitle}
-          </h1> 
-      */}
+      <div className="mb-6">
+        <Button asChild variant="outline" size="sm">
+          <Link href="/">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            {uiTranslations.returnToAppButtonText || translations.en.returnToAppButtonText}
+          </Link>
+        </Button>
+      </div>
+      
       <div className="space-y-6 text-foreground/90 leading-relaxed bg-card p-6 sm:p-8 rounded-lg shadow-lg">
         {statementSections.map(section => (
           <div key={section.titleKey}>
@@ -46,6 +51,3 @@ export default function PersonalStatementPage() {
     </div>
   );
 }
-
-
-    

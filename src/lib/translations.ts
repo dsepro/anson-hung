@@ -3,6 +3,7 @@
 
 export const translations = {
   en: {
+    language: "en", // Added to help determine UI language for personal statement page button
     loadingText: "Loading Dashboard...",
     // AppHeader
     nutriTrackTitle: "NutriTrack - Created and Designed by Anson Hung",
@@ -13,8 +14,8 @@ export const translations = {
     logOut: "Log out",
     switchToChineseButtonText: "繁體中文",
     readPersonalStatement: "Read My Personal Statement Here",
-    // Personal Statement Dialog (Titles for the statement itself are always English)
-    personalStatementDialogTitle: "Personal Statement",
+    // Personal Statement Dialog/Page
+    personalStatementDialogTitle: "Personal Statement", // Used if it were a dialog title
     personalStatementWhyTitle: "Why I would like to become a dietitian",
     personalStatementWhyBody: "Eating is something we do every day, yet food is far more than fuel—it's a fundamental component of well-being, a preventive measure against chronic diseases, and a gateway to better quality of life. By helping people make informed food choices, we can improve their wellbeing. In Hong Kong, the aging population poses a significant public health challenge, making effective nutrition strategies essential. As the demand for dietitians grows, I am eager to join this field, aiming to enhance health outcomes for individuals of all ages and support the community in making better dietary choices.",
     personalStatementExperienceTitle: "Relevant experience and strength",
@@ -26,7 +27,8 @@ export const translations = {
     personalStatementConclusionTitle: "Conclusion",
     personalStatementConclusionBody: "With my strong background in nutrition and a clear vision for the future, I believe I am well-suited for this program. I am eager to learn from the professionals at HKUSPACE and integrate their insights to promote better health and well-being in our communities.",
     personalStatementThanks: "Thank you for considering my application. I look forward to discussing my application and aspirations in more detail during an interview.",
-    closeButtonText: "Close",
+    closeButtonText: "Close", // Used if it were a dialog
+    returnToAppButtonText: "Return to Dashboard",
     // LeftSidebar
     chatWithDietitian: "Chat with Dietitian",
     userConditionExample: "Type 2 Diabetes, Hypertension",
@@ -63,7 +65,6 @@ export const translations = {
     quickAddFoodTitle: "Quick Add Food",
     oatmeal: "Oatmeal",
     salad: "Salad",
-    // apple: "Apple", // Already defined under TodaysMealsSection
     milk: "Milk",
     quickAddChickenBreast: "Chicken Breast",
     quickAddBrownRice: "Brown Rice",
@@ -107,12 +108,11 @@ export const translations = {
     statusValueOnly: "{value}",
     timeToday: "Today",
     timeYesterday: "Yesterday",
-    // Language Selector (Now button)
-    language: "Language",
     // Footer
     footerCredit: "This demo webpage was created and designed by Anson Hung for the application to Postgraduate Diploma in Human Nutrition and Postgraduate Diploma in Dietetics.",
   },
   zh: {
+    language: "zh", // Added to help determine UI language for personal statement page button
     loadingText: "正在載入儀表板...",
     // AppHeader
     nutriTrackTitle: "營養追蹤 - 由洪鉉鈴製作和設計",
@@ -123,9 +123,8 @@ export const translations = {
     logOut: "登出",
     switchToEnglishButtonText: "English",
     readPersonalStatement: "請在此瀏覽我的個人自述",
-    // Personal Statement Dialog
-    personalStatementDialogTitle: "個人自述", // Dialog title is translated
-    // Section titles and body are English as per request
+    // Personal Statement Dialog/Page
+    personalStatementDialogTitle: "個人自述", // Used if it were a dialog title
     personalStatementWhyTitle: "Why I would like to become a dietitian", 
     personalStatementWhyBody: "Eating is something we do every day, yet food is far more than fuel—it's a fundamental component of well-being, a preventive measure against chronic diseases, and a gateway to better quality of life. By helping people make informed food choices, we can improve their wellbeing. In Hong Kong, the aging population poses a significant public health challenge, making effective nutrition strategies essential. As the demand for dietitians grows, I am eager to join this field, aiming to enhance health outcomes for individuals of all ages and support the community in making better dietary choices.",
     personalStatementExperienceTitle: "Relevant experience and strength", 
@@ -137,7 +136,8 @@ export const translations = {
     personalStatementConclusionTitle: "Conclusion", 
     personalStatementConclusionBody: "With my strong background in nutrition and a clear vision for the future, I believe I am well-suited for this program. I am eager to learn from the professionals at HKUSPACE and integrate their insights to promote better health and well-being in our communities.",
     personalStatementThanks: "Thank you for considering my application. I look forward to discussing my application and aspirations in more detail during an interview.", 
-    closeButtonText: "關閉", // Close button is translated
+    closeButtonText: "關閉", // Used if it were a dialog
+    returnToAppButtonText: "返回儀表板",
     // LeftSidebar
     chatWithDietitian: "與營養師聊天",
     userConditionExample: "二型糖尿病，高血壓",
@@ -174,7 +174,6 @@ export const translations = {
     quickAddFoodTitle: "快速新增食物",
     oatmeal: "燕麥片",
     salad: "沙律",
-    // apple: "蘋果", // Already defined
     milk: "牛奶",
     quickAddChickenBreast: "雞胸肉",
     quickAddBrownRice: "糙米",
@@ -218,8 +217,6 @@ export const translations = {
     statusValueOnly: "{value}",
     timeToday: "今天",
     timeYesterday: "昨天",
-    // Language Selector (Now button)
-    language: "語言",
     // Footer
     footerCredit: "此示範用網頁由洪鉉鈴製作和設計 供報考人類營養學深造文憑/營養治療學深造文憑用",
   }
@@ -227,5 +224,3 @@ export const translations = {
 
 export type Translations = typeof translations.en;
 export type Language = keyof typeof translations;
-
-    
