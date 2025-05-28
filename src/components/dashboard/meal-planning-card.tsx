@@ -11,21 +11,24 @@ interface MealPlanningCardProps {
   translations: Translations;
 }
 
-const weeklyPlanData = [
-  { dayKey: 'monday', calories: '1,950 kcal', mealThumbnails: ['https://placehold.co/20x20/A8D5BA/333.png?text=B', 'https://placehold.co/20x20/FFDDA2/333.png?text=L', 'https://placehold.co/20x20/C5E1A5/333.png?text=D'] , dataAiHints: ['breakfast fruit', 'lunch meal', 'dinner food']},
-  { dayKey: 'tuesday', calories: '2,050 kcal', mealThumbnails: ['https://placehold.co/20x20/ADD8E6/333.png?text=B', 'https://placehold.co/20x20/E6B980/333.png?text=L', 'https://placehold.co/20x20/FFABAB/333.png?text=D'] , dataAiHints: ['healthy breakfast', 'quick lunch', 'light dinner']},
-  { dayKey: 'wednesday', calories: '1,850 kcal', mealThumbnails: ['https://placehold.co/20x20/FFCC80/333.png?text=B', 'https://placehold.co/20x20/A8D5BA/333.png?text=L', 'https://placehold.co/20x20/FFDDA2/333.png?text=D'] , dataAiHints: ['morning meal', 'midday food', 'evening supper']},
-];
-
-const mockRecipesData = [
-    { id: 'r1', name: 'Chicken Stir-fry', calories: '450 kcal', image: 'https://placehold.co/80x60/C5E1A5/333.png', dataAiHint: 'chicken stirfry' },
-    { id: 'r2', name: 'Quinoa Salad', calories: '380 kcal', image: 'https://placehold.co/80x60/FFDDA2/333.png', dataAiHint: 'quinoa salad' },
-    { id: 'r3', name: 'Lentil Soup', calories: '320 kcal', image: 'https://placehold.co/80x60/FFCC80/333.png', dataAiHint: 'lentil soup' },
-];
-
-
 export function MealPlanningCard({ translations }: MealPlanningCardProps) {
-  // In a real app, 'May 15' would be dynamic
+  const weeklyPlanData = [
+    { dayKey: 'monday', calories: '1,950 kcal', mealThumbnails: ['https://placehold.co/20x20/A8D5BA/333.png?text=B', 'https://placehold.co/20x20/FFDDA2/333.png?text=L', 'https://placehold.co/20x20/C5E1A5/333.png?text=D'] , dataAiHints: ['breakfast fruit', 'lunch meal', 'dinner food']},
+    { dayKey: 'tuesday', calories: '2,050 kcal', mealThumbnails: ['https://placehold.co/20x20/ADD8E6/333.png?text=B', 'https://placehold.co/20x20/E6B980/333.png?text=L', 'https://placehold.co/20x20/FFABAB/333.png?text=D'] , dataAiHints: ['healthy breakfast', 'quick lunch', 'light dinner']},
+    { dayKey: 'wednesday', calories: '1,850 kcal', mealThumbnails: ['https://placehold.co/20x20/FFCC80/333.png?text=B', 'https://placehold.co/20x20/A8D5BA/333.png?text=L', 'https://placehold.co/20x20/FFDDA2/333.png?text=D'] , dataAiHints: ['morning meal', 'midday food', 'evening supper']},
+  ];
+
+  const mockRecipesDataRaw = [
+      { id: 'r1', nameKey: 'recipeChickenStirFry', calories: '450 kcal', image: 'https://placehold.co/80x60/C5E1A5/333.png', dataAiHint: 'chicken stirfry' },
+      { id: 'r2', nameKey: 'recipeQuinoaSalad', calories: '380 kcal', image: 'https://placehold.co/80x60/FFDDA2/333.png', dataAiHint: 'quinoa salad' },
+      { id: 'r3', nameKey: 'recipeLentilSoup', calories: '320 kcal', image: 'https://placehold.co/80x60/FFCC80/333.png', dataAiHint: 'lentil soup' },
+  ];
+
+  const translatedRecipesData = mockRecipesDataRaw.map(recipe => ({
+    ...recipe,
+    name: translations[recipe.nameKey as keyof Translations] || recipe.nameKey,
+  }));
+
   const weekDateString = translations.language === 'zh' ? "五月 15日" : "May 15";
 
   return (
@@ -70,11 +73,10 @@ export function MealPlanningCard({ translations }: MealPlanningCardProps) {
                 <h4 className="text-xs font-medium text-muted-foreground">{translations.yourRecipes}</h4>
                 <Button variant="link" size="sm" className="text-xs h-auto p-0 text-primary hover:text-primary/80">{translations.viewAll}</Button>
             </div>
-            {mockRecipesData.map(recipe => (
+            {translatedRecipesData.map(recipe => (
                  <div key={recipe.id} className="flex items-center gap-3 p-2.5 rounded-md bg-card hover:bg-secondary/10 border border-border/60">
                     <Image src={recipe.image} alt={recipe.name} width={60} height={45} className="rounded-md object-cover" data-ai-hint={recipe.dataAiHint} />
                     <div>
-                        {/* Recipe name is dynamic data */}
                         <p className="text-sm font-medium">{recipe.name}</p>
                         <p className="text-xs text-muted-foreground">{recipe.calories.replace('kcal', translations.kcalUnit)}</p>
                     </div>
@@ -89,3 +91,5 @@ export function MealPlanningCard({ translations }: MealPlanningCardProps) {
     </Card>
   );
 }
+
+    

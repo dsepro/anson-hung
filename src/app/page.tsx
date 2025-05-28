@@ -7,7 +7,6 @@ import { LeftSidebar } from '@/components/dashboard/left-sidebar';
 import { MainContentArea } from '@/components/dashboard/main-content-area';
 import { RightSidebar } from '@/components/dashboard/right-sidebar';
 import { AppFooter } from '@/components/layout/app-footer';
-// import { PersonalStatementDisplay } from '@/components/layout/personal-statement-display'; // No longer used
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 
@@ -16,6 +15,7 @@ export const translations = {
     loadingText: "Loading Dashboard...",
     // AppHeader
     nutriTrackTitle: "NutriTrack",
+    userNameDisplay: "Chan Tai Man",
     myAccount: "My Account",
     profile: "Profile",
     settings: "Settings",
@@ -35,7 +35,7 @@ export const translations = {
     personalStatementConclusionTitle: "Conclusion",
     personalStatementConclusionBody: "With my strong background in nutrition and a clear vision for the future, I believe I am well-suited for this program. I am eager to learn from the professionals at HKUSPACE and integrate their insights to promote better health and well-being in our communities.",
     personalStatementThanks: "Thank you for considering my application. I look forward to discussing my application and aspirations in more detail during an interview.",
-    closeButtonText: "Close", // For any potential future dialogs
+    closeButtonText: "Close",
     // LeftSidebar
     chatWithDietitian: "Chat with Dietitian",
     userConditionExample: "Type 2 Diabetes, Hypertension",
@@ -48,6 +48,9 @@ export const translations = {
     sodium: "Sodium",
     // DietitianRecommendationsCard
     dietitianRecommendationsTitle: "Dietitian Recommendations",
+    recTextLeafyGreens: "Try to include more leafy greens in your lunch to help manage blood sugar levels.",
+    recTextSodium: "Consider reducing sodium intake by avoiding processed foods.",
+    recTextCalcium: "Your calcium intake is below recommended levels. Try adding more dairy or fortified alternatives.",
     // MainContentArea
     // TodaysMealsSection
     todaysMealsTitle: "Today's Meals",
@@ -85,6 +88,9 @@ export const translations = {
     createMealPlan: "Create Meal Plan",
     yourRecipes: "Your Recipes",
     addNewRecipe: "Add New Recipe",
+    recipeChickenStirFry: "Chicken Stir-fry",
+    recipeQuinoaSalad: "Quinoa Salad",
+    recipeLentilSoup: "Lentil Soup",
     monday: "Monday",
     tuesday: "Tuesday",
     wednesday: "Wednesday",
@@ -108,6 +114,7 @@ export const translations = {
     loadingText: "正在載入儀表板...",
     // AppHeader
     nutriTrackTitle: "營養追蹤",
+    userNameDisplay: "陳大文",
     myAccount: "我的帳戶",
     profile: "個人資料",
     settings: "設定",
@@ -115,7 +122,7 @@ export const translations = {
     switchToEnglishButtonText: "English",
     readPersonalStatement: "請在此瀏覽我的個人自述",
     // Personal Statement Dialog (Titles for the statement itself are always English)
-    personalStatementDialogTitle: "個人自述", // This key is for the new page title, can be translated
+    personalStatementDialogTitle: "個人自述",
     personalStatementWhyTitle: "Why I would like to become a dietitian", // English Title
     personalStatementWhyBody: "Eating is something we do every day, yet food is far more than fuel—it's a fundamental component of well-being, a preventive measure against chronic diseases, and a gateway to better quality of life. By helping people make informed food choices, we can improve their wellbeing. In Hong Kong, the aging population poses a significant public health challenge, making effective nutrition strategies essential. As the demand for dietitians grows, I am eager to join this field, aiming to enhance health outcomes for individuals of all ages and support the community in making better dietary choices.",
     personalStatementExperienceTitle: "Relevant experience and strength", // English Title
@@ -127,7 +134,7 @@ export const translations = {
     personalStatementConclusionTitle: "Conclusion", // English Title
     personalStatementConclusionBody: "With my strong background in nutrition and a clear vision for the future, I believe I am well-suited for this program. I am eager to learn from the professionals at HKUSPACE and integrate their insights to promote better health and well-being in our communities.",
     personalStatementThanks: "Thank you for considering my application. I look forward to discussing my application and aspirations in more detail during an interview.", // English Text
-    closeButtonText: "關閉", // For any potential future dialogs
+    closeButtonText: "關閉",
     // LeftSidebar
     chatWithDietitian: "與營養師聊天",
     userConditionExample: "二型糖尿病，高血壓",
@@ -140,6 +147,9 @@ export const translations = {
     sodium: "鈉",
     // DietitianRecommendationsCard
     dietitianRecommendationsTitle: "營養師建議",
+    recTextLeafyGreens: "嘗試在午餐中加入更多綠葉蔬菜，有助於控制血糖水平。",
+    recTextSodium: "考慮通過避免加工食品來減少鈉的攝入量。",
+    recTextCalcium: "您的鈣攝入量低於建議水平。嘗試添加更多乳製品或強化替代品。",
     // MainContentArea
     // TodaysMealsSection
     todaysMealsTitle: "今日膳食",
@@ -153,7 +163,7 @@ export const translations = {
     // QuickAddFoodSection
     quickAddFoodTitle: "快速新增食物",
     oatmeal: "燕麥片",
-    salad: "沙拉",
+    salad: "沙律",
     apple: "蘋果",
     milk: "牛奶",
     more: "更多",
@@ -177,6 +187,9 @@ export const translations = {
     createMealPlan: "建立膳食計劃",
     yourRecipes: "您的食譜",
     addNewRecipe: "新增食譜",
+    recipeChickenStirFry: "中式炒雞柳",
+    recipeQuinoaSalad: "藜麥沙律",
+    recipeLentilSoup: "扁豆湯",
     monday: "星期一",
     tuesday: "星期二",
     wednesday: "星期三",
@@ -202,7 +215,7 @@ export type Translations = typeof translations.en;
 export type Language = keyof typeof translations;
 
 export default function NutriTrackDashboardPage() {
-  const [isLoading, setIsLoading] = useState(false); // isLoading can be used by specific actions
+  const [isLoading, setIsLoading] = useState(false);
   const [language, setLanguage] = useState<Language>('en');
   const currentTranslations = translations[language];
 
@@ -219,7 +232,7 @@ export default function NutriTrackDashboardPage() {
     return (
         <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50">
             <Loader2 className="h-12 w-12 text-primary animate-spin" />
-            <p className="ml-4 text-lg text-primary">{translations.en.loadingText}</p> {/* Default to English for initial load */}
+            <p className="ml-4 text-lg text-primary">{translations.en.loadingText}</p>
         </div>
     );
   }
@@ -229,7 +242,8 @@ export default function NutriTrackDashboardPage() {
       <AppHeader
         currentLanguage={language}
         onToggleLanguage={toggleLanguage}
-        userName="John Doe" // This should ideally come from user data
+        userName={currentTranslations.userNameDisplay}
+        userAvatar="https://placehold.co/40x40.png" // Generic placeholder for header
         translations={currentTranslations}
       />
 
@@ -241,8 +255,6 @@ export default function NutriTrackDashboardPage() {
 
       <AppFooter translations={currentTranslations} />
 
-      {/* PersonalStatementDisplay is no longer used here */}
-
       {isLoading && (
         <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50">
           <Loader2 className="h-12 w-12 text-primary animate-spin" />
@@ -252,3 +264,5 @@ export default function NutriTrackDashboardPage() {
     </div>
   );
 }
+
+    

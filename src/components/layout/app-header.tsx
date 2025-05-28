@@ -1,8 +1,7 @@
 
 "use client";
 import Link from 'next/link';
-import { Leaf, ChevronDown, Edit3 } from 'lucide-react'; // Added Edit3 for statement button
-import { LanguageSelector } from '@/components/nutritrack/language-selector';
+import { Leaf, ChevronDown, Edit3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -18,7 +17,7 @@ import type { Translations, Language } from '@/app/page';
 interface AppHeaderProps {
   currentLanguage: Language;
   onToggleLanguage: () => void;
-  userName?: string;
+  userName: string; // Changed from optional
   userAvatar?: string;
   translations: Translations;
 }
@@ -26,7 +25,7 @@ interface AppHeaderProps {
 export function AppHeader({
   currentLanguage,
   onToggleLanguage,
-  userName = "John Doe",
+  userName,
   userAvatar,
   translations
 }: AppHeaderProps) {
@@ -40,6 +39,9 @@ export function AppHeader({
     window.open('/personal-statement', '_blank');
   };
 
+  const buttonText = currentLanguage === 'en' ? translations.switchToChineseButtonText : translations.switchToEnglishButtonText;
+
+
   return (
     <header className="bg-card shadow-sm sticky top-0 z-40 h-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
@@ -49,12 +51,15 @@ export function AppHeader({
         </Link>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <LanguageSelector
-            currentLanguage={currentLanguage}
-            onToggleLanguage={onToggleLanguage}
-            translations={translations}
-            className="h-9 text-xs sm:text-sm px-2 sm:px-3"
-          />
+          <Button
+            variant="outline"
+            onClick={onToggleLanguage}
+            className="h-9 text-xs sm:text-sm px-2 sm:px-3 w-auto min-w-[100px] sm:min-w-[110px]"
+            aria-label={currentLanguage === 'en' ? "Switch to Traditional Chinese" : "Switch to English"}
+          >
+            {/* <Globe className="mr-1.5 h-4 w-4 sm:mr-2" /> Removed Globe icon */}
+            {buttonText}
+          </Button>
           <Button
             variant="outline"
             onClick={openPersonalStatement}
@@ -89,3 +94,5 @@ export function AppHeader({
     </header>
   );
 }
+
+    

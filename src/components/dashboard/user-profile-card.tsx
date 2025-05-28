@@ -1,7 +1,7 @@
 
 "use client";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Card, CardContent } from '@/components/ui/card'; // Removed CardHeader, CardTitle as they are not used per design
+import { Card, CardContent } from '@/components/ui/card';
 
 interface UserProfileCardProps {
   user: {
@@ -29,3 +29,4 @@ export function UserProfileCard({ user }: UserProfileCardProps) {
   );
 }
 
+    
