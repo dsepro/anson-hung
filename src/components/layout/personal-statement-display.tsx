@@ -41,13 +41,15 @@ export function PersonalStatementDisplay({ isOpen, onClose, translations }: Pers
             {translations.personalStatementDialogTitle}
           </DialogTitle>
         </DialogHeader>
-        <ScrollArea className="flex-grow pr-6 -mr-6"> {/* pr-6 and -mr-6 to account for scrollbar width */}
-          <div className="space-y-6 py-4 text-foreground/90 leading-relaxed">
+        <ScrollArea className="flex-grow"> {/* ScrollArea will take available vertical space */}
+          <div className="space-y-6 py-4 px-2 sm:px-4 text-foreground/90 leading-relaxed"> {/* Added horizontal padding to content */}
             {statementSections.map(section => (
               <div key={section.titleKey}>
                 <h2 className="text-lg font-semibold text-primary mb-2">
                   {translations[section.titleKey]}
                 </h2>
+                {/* For the body, translations[section.bodyKey] will correctly pick up English text 
+                    even if UI language is Chinese, due to setup in page.tsx translations.zh object */}
                 {translations[section.bodyKey].split('\n').map((paragraph, index) => (
                   <p key={index} className="mb-3 text-sm sm:text-base">
                     {paragraph}
@@ -62,7 +64,7 @@ export function PersonalStatementDisplay({ isOpen, onClose, translations }: Pers
              </div>
           </div>
         </ScrollArea>
-        <DialogFooter className="mt-4 pt-4 border-t">
+        <DialogFooter className="mt-auto pt-4 border-t"> {/* Ensure footer is at the bottom */}
           <DialogClose asChild>
             <Button type="button" variant="outline" onClick={onClose}>
               {translations.closeButtonText}
