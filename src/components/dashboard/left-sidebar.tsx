@@ -44,7 +44,7 @@ export function LeftSidebar({ translations }: LeftSidebarProps) {
   }));
 
   return (
-    <aside className="w-full md:w-1/4 lg:w-1/5 xl:w-[22%] md:flex-shrink-0 p-4 space-y-6 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto bg-transparent md:border-r border-border/60">
+    <aside className="w-full md:w-1/4 lg:w-1/5 xl:w-[22%] md:flex-shrink-0 p-4 space-y-6 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto bg-card md:border-r border-border/60">
       <UserProfileCard user={mockUser} />
       <DailyGoalsCard goals={translatedGoals} translations={translations} />
       <DietitianRecommendationsCard 
@@ -61,3 +61,4 @@ export function LeftSidebar({ translations }: LeftSidebarProps) {
     
 
     
+
