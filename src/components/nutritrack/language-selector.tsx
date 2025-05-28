@@ -1,33 +1,31 @@
 
 "use client";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 import { Globe } from 'lucide-react';
-import type { Language } from '@/app/page';
+import type { Language, Translations } from '@/app/page';
 
 interface LanguageSelectorProps {
-  language: Language;
-  onLanguageChange: (lang: Language) => void;
+  currentLanguage: Language;
+  onToggleLanguage: () => void;
+  translations: Translations;
   className?: string;
 }
 
-export function LanguageSelector({ language, onLanguageChange, className }: LanguageSelectorProps) {
+export function LanguageSelector({ currentLanguage, onToggleLanguage, translations, className }: LanguageSelectorProps) {
+  const buttonText = currentLanguage === 'en' ? translations.switchToChineseButtonText : translations.switchToEnglishButtonText;
+
   return (
-    <Select value={language} onValueChange={(value: Language) => onLanguageChange(value)}>
-      <SelectTrigger className={className ? className : "w-auto min-w-[120px] sm:min-w-[130px] text-sm h-9"}>
-        <Globe className="mr-1.5 h-4 w-4 sm:mr-2" />
-        <SelectValue placeholder="Language" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="en">English</SelectItem>
-        <SelectItem value="zh">繁體中文</SelectItem>
-      </SelectContent>
-    </Select>
+    <Button
+      variant="outline"
+      onClick={onToggleLanguage}
+      className={className ? className : "w-auto min-w-[100px] sm:min-w-[110px] text-sm h-9 px-3"}
+      aria-label={currentLanguage === 'en' ? "Switch to Traditional Chinese" : "Switch to English"}
+    >
+      <Globe className="mr-1.5 h-4 w-4 sm:mr-2" />
+      {buttonText}
+    </Button>
   );
 }
+
+    
