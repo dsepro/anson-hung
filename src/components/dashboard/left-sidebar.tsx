@@ -5,7 +5,7 @@ import { DailyGoalsCard } from './daily-goals-card';
 import { DietitianRecommendationsCard } from './dietitian-recommendations-card';
 import { Button } from '@/components/ui/button';
 import { MessageSquare } from 'lucide-react';
-import type { Translations } from '@/app/page';
+import type { Translations } from '@/lib/translations'; // Updated import
 
 interface LeftSidebarProps {
   translations: Translations;
@@ -64,5 +64,7 @@ export function LeftSidebar({ translations }: LeftSidebarProps) {
     </aside>
   );
 }
+
+    
 
     

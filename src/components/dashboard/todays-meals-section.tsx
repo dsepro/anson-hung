@@ -15,7 +15,7 @@ import {
   Soup,
   Fish,
 } from 'lucide-react';
-import type { Translations, Language } from '@/app/page';
+import type { Translations, Language } from '@/lib/translations'; // Updated import
 
 interface MealItem {
   id: string;
@@ -167,3 +167,5 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
   );
 }
 
+
+    

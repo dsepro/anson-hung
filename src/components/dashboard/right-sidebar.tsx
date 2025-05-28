@@ -2,7 +2,7 @@
 "use client";
 import { MealPlanningCard } from './meal-planning-card';
 import { HealthMetricsCard } from './health-metrics-card';
-import type { Translations } from '@/app/page';
+import type { Translations } from '@/lib/translations'; // Updated import
 
 interface RightSidebarProps {
   translations: Translations;
@@ -17,3 +17,5 @@ export function RightSidebar({ translations }: RightSidebarProps) {
   );
 }
 
+
+    

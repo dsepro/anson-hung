@@ -2,7 +2,7 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Lightbulb } from 'lucide-react';
-import type { Translations } from '@/app/page';
+import type { Translations } from '@/lib/translations'; // Updated import
 
 interface DietitianRecommendationsCardProps {
   recommendations: Array<{ text: string; styleKey: 'green' | 'blue' | 'yellow' }>;
@@ -39,3 +39,6 @@ export function DietitianRecommendationsCard({ recommendations, translations }: 
     </Card>
   );
 }
+
+
+    

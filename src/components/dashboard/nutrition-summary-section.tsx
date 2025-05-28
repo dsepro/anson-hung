@@ -2,7 +2,7 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart as BarChartIcon } from 'lucide-react'; 
-import type { Translations } from '@/app/page';
+import type { Translations } from '@/lib/translations'; // Updated import
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { ChartConfig, ChartContainer, ChartTooltipContent } from '@/components/ui/chart';
 
@@ -100,3 +100,6 @@ export function NutritionSummarySection({ translations }: NutritionSummarySectio
     </Card>
   );
 }
+
+
+    

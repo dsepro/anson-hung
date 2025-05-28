@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Droplets, HeartPulse, Scale, ArrowRight } from 'lucide-react';
-import type { Translations } from '@/app/page';
+import type { Translations } from '@/lib/translations'; // Updated import
 
 interface Metric {
   id: string;
@@ -88,3 +88,6 @@ export function HealthMetricsCard({ translations }: HealthMetricsCardProps) {
     </Card>
   );
 }
+
+
+    

@@ -2,7 +2,7 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import type { Translations } from '@/app/page';
+import type { Translations } from '@/lib/translations'; // Updated import
 
 interface Goal {
   name: string;
@@ -37,3 +37,6 @@ export function DailyGoalsCard({ goals, translations }: DailyGoalsCardProps) {
     </Card>
   );
 }
+
+
+    

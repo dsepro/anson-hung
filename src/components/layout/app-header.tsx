@@ -1,9 +1,9 @@
 
 "use client";
 import Link from 'next/link';
-import { Leaf, ChevronDown, Edit3, User } from 'lucide-react'; // Added User
+import { Leaf, ChevronDown, Edit3, User } from 'lucide-react'; 
 import { Button } from '@/components/ui/button';
-import { Avatar } from '@/components/ui/avatar'; // Removed AvatarImage, AvatarFallback
+import { Avatar } from '@/components/ui/avatar'; 
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,13 +12,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { Translations, Language } from '@/app/page';
+import type { Translations, Language } from '@/lib/translations'; // Updated import
 
 interface AppHeaderProps {
   currentLanguage: Language;
   onToggleLanguage: () => void;
   userName: string;
-  // userAvatar?: string; // No longer used for display
   translations: Translations;
 }
 
@@ -26,14 +25,8 @@ export function AppHeader({
   currentLanguage,
   onToggleLanguage,
   userName,
-  // userAvatar, // No longer used
   translations
 }: AppHeaderProps) {
-  // const userInitials = userName // Not needed if icon is always shown
-  //   .split(' ')
-  //   .map(n => n[0])
-  //   .join('')
-  //   .toUpperCase();
 
   const openPersonalStatement = () => {
     window.open('/personal-statement', '_blank');
@@ -92,3 +85,6 @@ export function AppHeader({
     </header>
   );
 }
+
+
+    

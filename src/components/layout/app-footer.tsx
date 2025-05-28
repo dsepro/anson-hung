@@ -1,7 +1,7 @@
 
 "use client";
 
-import type { Translations } from '@/app/page';
+import type { Translations } from '@/lib/translations'; // Updated import
 
 interface AppFooterProps {
   translations: Translations;
@@ -18,3 +18,6 @@ export function AppFooter({ translations }: AppFooterProps) {
     </footer>
   );
 }
+
+
+    

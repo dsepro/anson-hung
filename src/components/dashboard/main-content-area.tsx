@@ -3,11 +3,11 @@
 import { TodaysMealsSection } from './todays-meals-section';
 import { QuickAddFoodSection } from './quick-add-food-section';
 import { NutritionSummarySection } from './nutrition-summary-section';
-import type { Translations, Language } from '@/app/page'; // Import Language type
+import type { Translations, Language } from '@/lib/translations'; // Updated import
 
 interface MainContentAreaProps {
   translations: Translations;
-  language: Language; // Add language prop
+  language: Language; 
 }
 
 export function MainContentArea({ translations, language }: MainContentAreaProps) {
@@ -19,3 +19,6 @@ export function MainContentArea({ translations, language }: MainContentAreaProps
     </main>
   );
 }
+
+
+    

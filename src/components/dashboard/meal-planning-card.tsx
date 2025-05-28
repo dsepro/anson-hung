@@ -3,8 +3,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { CalendarDays, PlusCircle, Utensils, Coffee, Sandwich, Fish, Leaf, Soup as SoupIcon, Drumstick, Salad } from 'lucide-react'; // Added Salad icon
-import type { Translations } from '@/app/page';
+import { CalendarDays, PlusCircle, Utensils, Coffee, Sandwich, Fish, Leaf, Soup as SoupIcon, Drumstick, Salad } from 'lucide-react'; 
+import type { Translations } from '@/lib/translations'; // Updated import
 
 interface MealPlanningCardProps {
   translations: Translations;
@@ -43,7 +43,7 @@ export function MealPlanningCard({ translations }: MealPlanningCardProps) {
 
   const mockRecipesDataRaw = [
       { id: 'r1', nameKey: 'recipeChickenStirFry', calories: '450 kcal', icon: Drumstick, dataAiHint: 'chicken stirfry' },
-      { id: 'r2', nameKey: 'recipeQuinoaSalad', calories: '380 kcal', icon: Leaf, dataAiHint: 'quinoa salad' }, // Changed icon to Leaf for Salad
+      { id: 'r2', nameKey: 'recipeQuinoaSalad', calories: '380 kcal', icon: Leaf, dataAiHint: 'quinoa salad' }, 
       { id: 'r3', nameKey: 'recipeLentilSoup', calories: '320 kcal', icon: SoupIcon, dataAiHint: 'lentil soup' },
   ];
 
@@ -124,4 +124,6 @@ export function MealPlanningCard({ translations }: MealPlanningCardProps) {
     </Card>
   );
 }
+    
+
     

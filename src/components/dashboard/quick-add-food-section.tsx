@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Apple, Camera, Carrot, Milk, ScanLine, Wheat, PlusCircle, Drumstick, Leaf, Salad, CupSoda } from 'lucide-react';
-import type { Translations } from '@/app/page';
+import type { Translations } from '@/lib/translations'; // Updated import
 
 interface QuickAddFoodSectionProps {
   translations: Translations;
@@ -51,3 +51,6 @@ export function QuickAddFoodSection({ translations }: QuickAddFoodSectionProps) 
     </Card>
   );
 }
+
+
+    

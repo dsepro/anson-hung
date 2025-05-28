@@ -3,7 +3,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Globe } from 'lucide-react';
-import type { Language, Translations } from '@/app/page';
+import type { Language, Translations } from '@/lib/translations'; // Updated import
 
 interface LanguageSelectorProps {
   currentLanguage: Language;
@@ -27,5 +27,7 @@ export function LanguageSelector({ currentLanguage, onToggleLanguage, translatio
     </Button>
   );
 }
+
+    
 
     

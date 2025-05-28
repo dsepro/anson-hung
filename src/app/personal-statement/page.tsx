@@ -1,7 +1,7 @@
 
 // src/app/personal-statement/page.tsx
-import { translations } from '@/app/page'; // Import translations from the main page
-import { ScrollArea } from "@/components/ui/scroll-area"; // For potential future use if content becomes very long
+import { translations } from '@/lib/translations'; // Import translations from the new shared file
+import { ScrollArea } from "@/components/ui/scroll-area"; 
 
 export default function PersonalStatementPage() {
   // Personal statement content and its titles are always displayed in English
@@ -46,3 +46,6 @@ export default function PersonalStatementPage() {
     </div>
   );
 }
+
+
+    
