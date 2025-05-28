@@ -1,9 +1,9 @@
 
 "use client";
 import Link from 'next/link';
-import { Leaf, ChevronDown, Edit3 } from 'lucide-react';
+import { Leaf, ChevronDown, Edit3, User } from 'lucide-react'; // Added User
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar } from '@/components/ui/avatar'; // Removed AvatarImage, AvatarFallback
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,8 +17,8 @@ import type { Translations, Language } from '@/app/page';
 interface AppHeaderProps {
   currentLanguage: Language;
   onToggleLanguage: () => void;
-  userName: string; // Changed from optional
-  userAvatar?: string;
+  userName: string;
+  // userAvatar?: string; // No longer used for display
   translations: Translations;
 }
 
@@ -26,14 +26,14 @@ export function AppHeader({
   currentLanguage,
   onToggleLanguage,
   userName,
-  userAvatar,
+  // userAvatar, // No longer used
   translations
 }: AppHeaderProps) {
-  const userInitials = userName
-    .split(' ')
-    .map(n => n[0])
-    .join('')
-    .toUpperCase();
+  // const userInitials = userName // Not needed if icon is always shown
+  //   .split(' ')
+  //   .map(n => n[0])
+  //   .join('')
+  //   .toUpperCase();
 
   const openPersonalStatement = () => {
     window.open('/personal-statement', '_blank');
@@ -57,7 +57,6 @@ export function AppHeader({
             className="h-9 text-xs sm:text-sm px-2 sm:px-3 w-auto min-w-[100px] sm:min-w-[110px]"
             aria-label={currentLanguage === 'en' ? "Switch to Traditional Chinese" : "Switch to English"}
           >
-            {/* <Globe className="mr-1.5 h-4 w-4 sm:mr-2" /> Removed Globe icon */}
             {buttonText}
           </Button>
           <Button
@@ -72,9 +71,8 @@ export function AppHeader({
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="flex items-center gap-2 h-10 px-2">
-                <Avatar className="h-8 w-8" data-ai-hint="profile avatar">
-                  {userAvatar && <AvatarImage src={userAvatar} alt={userName} />}
-                  <AvatarFallback>{userInitials}</AvatarFallback>
+                <Avatar className="h-8 w-8 bg-muted text-muted-foreground flex items-center justify-center" data-ai-hint="profile avatar">
+                   <User className="h-5 w-5" />
                 </Avatar>
                 <span className="hidden sm:inline text-sm font-medium">{userName}</span>
                 <ChevronDown className="h-4 w-4 opacity-70" />
@@ -94,5 +92,3 @@ export function AppHeader({
     </header>
   );
 }
-
-    

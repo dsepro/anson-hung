@@ -7,7 +7,7 @@ import { LeftSidebar } from '@/components/dashboard/left-sidebar';
 import { MainContentArea } from '@/components/dashboard/main-content-area';
 import { RightSidebar } from '@/components/dashboard/right-sidebar';
 import { AppFooter } from '@/components/layout/app-footer';
-import { useToast } from '@/hooks/use-toast';
+// import { useToast } from '@/hooks/use-toast'; // useToast currently unused
 import { Loader2 } from 'lucide-react';
 
 export const translations = {
@@ -15,7 +15,7 @@ export const translations = {
     loadingText: "Loading Dashboard...",
     // AppHeader
     nutriTrackTitle: "NutriTrack",
-    userNameDisplay: "Chan Tai Man",
+    userNameDisplay: "Chan Tai Man", // User name
     myAccount: "My Account",
     profile: "Profile",
     settings: "Settings",
@@ -35,10 +35,10 @@ export const translations = {
     personalStatementConclusionTitle: "Conclusion",
     personalStatementConclusionBody: "With my strong background in nutrition and a clear vision for the future, I believe I am well-suited for this program. I am eager to learn from the professionals at HKUSPACE and integrate their insights to promote better health and well-being in our communities.",
     personalStatementThanks: "Thank you for considering my application. I look forward to discussing my application and aspirations in more detail during an interview.",
-    closeButtonText: "Close",
+    closeButtonText: "Close", // Though dialog is removed, key can remain
     // LeftSidebar
     chatWithDietitian: "Chat with Dietitian",
-    userConditionExample: "Type 2 Diabetes, Hypertension",
+    userConditionExample: "Type 2 Diabetes, Hypertension", // Added English for this
     // DailyGoalsCard
     dailyGoalsTitle: "Daily Goals",
     calories: "Calories",
@@ -65,14 +65,14 @@ export const translations = {
     mealNameOrangeJuice: "Orange Juice",
     mealNameGrilledChickenSalad: "Grilled Chicken Salad",
     mealNameWholeGrainBread: "Whole Grain Bread",
-    mealNameApple: "Apple", // Used as a meal item here
+    mealNameApple: "Apple",
     mealNameVegetableSoup: "Vegetable Soup",
     mealNameBakedSalmon: "Baked Salmon",
     // QuickAddFoodSection
     quickAddFoodTitle: "Quick Add Food",
-    oatmeal: "Oatmeal", // Used as a quick add item
+    oatmeal: "Oatmeal",
     salad: "Salad",
-    apple: "Apple", // Used as a quick add item
+    // apple: "Apple", // Already in TodaysMealsSection names
     milk: "Milk",
     more: "More",
     takePhoto: "Take Photo",
@@ -113,7 +113,7 @@ export const translations = {
     timeToday: "Today",
     timeYesterday: "Yesterday",
     // Language Selector (Now button)
-    language: "Language",
+    language: "Language", // Generic key, actual button text is switchToChineseButtonText/switchToEnglishButtonText
     // Footer
     footerCredit: "This demo webpage was created and designed by Anson Hung for the application to Postgraduate Diploma in Human Nutrition and Postgraduate Diploma in Dietetics.",
   },
@@ -121,7 +121,7 @@ export const translations = {
     loadingText: "正在載入儀表板...",
     // AppHeader
     nutriTrackTitle: "營養追蹤",
-    userNameDisplay: "陳大文",
+    userNameDisplay: "陳大文", // User name
     myAccount: "我的帳戶",
     profile: "個人資料",
     settings: "設定",
@@ -141,7 +141,7 @@ export const translations = {
     personalStatementConclusionTitle: "Conclusion", // English Title
     personalStatementConclusionBody: "With my strong background in nutrition and a clear vision for the future, I believe I am well-suited for this program. I am eager to learn from the professionals at HKUSPACE and integrate their insights to promote better health and well-being in our communities.",
     personalStatementThanks: "Thank you for considering my application. I look forward to discussing my application and aspirations in more detail during an interview.", // English Text
-    closeButtonText: "關閉",
+    closeButtonText: "關閉", // Though dialog is removed, key can remain
     // LeftSidebar
     chatWithDietitian: "與營養師聊天",
     userConditionExample: "二型糖尿病，高血壓",
@@ -171,14 +171,14 @@ export const translations = {
     mealNameOrangeJuice: "橙汁",
     mealNameGrilledChickenSalad: "烤雞沙律",
     mealNameWholeGrainBread: "全麥麵包",
-    mealNameApple: "蘋果", // 用作膳食項目
+    mealNameApple: "蘋果",
     mealNameVegetableSoup: "蔬菜湯",
     mealNameBakedSalmon: "烤三文魚",
     // QuickAddFoodSection
     quickAddFoodTitle: "快速新增食物",
-    oatmeal: "燕麥片", // 用作快速新增項目
+    oatmeal: "燕麥片",
     salad: "沙律",
-    apple: "蘋果", // 用作快速新增項目
+    // apple: "蘋果", // Already in TodaysMealsSection names
     milk: "牛奶",
     more: "更多",
     takePhoto: "拍照新增",
@@ -196,7 +196,7 @@ export const translations = {
     mealPlanningTitle: "膳食計劃",
     weeklyPlanTab: "週計劃",
     recipesTab: "食譜",
-    weekOf: "{date}週",
+    weekOf: "{date}週", // Example: "五月 15日週"
     viewAll: "查看全部",
     createMealPlan: "建立膳食計劃",
     yourRecipes: "您的食譜",
@@ -219,7 +219,7 @@ export const translations = {
     timeToday: "今天",
     timeYesterday: "昨天",
     // Language Selector (Now button)
-    language: "語言",
+    language: "語言", // Generic key, actual button text is switchToChineseButtonText/switchToEnglishButtonText
     // Footer
     footerCredit: "此示範用網頁由洪鉉鈴製作和設計 供報考人類營養學深造文憑/營養治療學深造文憑用",
   }
@@ -229,7 +229,7 @@ export type Translations = typeof translations.en;
 export type Language = keyof typeof translations;
 
 export default function NutriTrackDashboardPage() {
-  const [isLoading, setIsLoading] = useState(false); // Set to false by default, or true if you have an initial loading phase
+  const [_isLoading, setIsLoading] = useState(false); // isLoading not actively used for a global spinner now
   const [language, setLanguage] = useState<Language>('en');
   const currentTranslations = translations[language];
 
@@ -258,7 +258,7 @@ export default function NutriTrackDashboardPage() {
         currentLanguage={language}
         onToggleLanguage={toggleLanguage}
         userName={currentTranslations.userNameDisplay}
-        userAvatar="https://placehold.co/40x40.png" // Generic placeholder for header
+        // userAvatar prop removed
         translations={currentTranslations}
       />
 
@@ -270,16 +270,12 @@ export default function NutriTrackDashboardPage() {
 
       <AppFooter translations={currentTranslations} />
 
-      {isLoading && (
+      {/* isLoading && ( // Global spinner can be re-enabled if needed
         <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50">
           <Loader2 className="h-12 w-12 text-primary animate-spin" />
           <p className="ml-4 text-lg text-primary">{currentTranslations.loadingText}</p>
         </div>
-      )}
+      )*/}
     </div>
   );
 }
-
-    
-
-    
