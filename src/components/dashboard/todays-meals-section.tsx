@@ -5,11 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, PlusCircle } from 'lucide-react';
 import Image from 'next/image';
-import type { Translations, Language } from '@/app/page'; // Import Language type
+import type { Translations, Language } from '@/app/page';
 
 interface MealItem {
   id: string;
-  name: string;
+  nameKey: keyof Translations; // Changed from name
   quantity: string;
   calories: string;
   pfc: string; // Protein, Fat, Carbs
@@ -24,33 +24,44 @@ interface MealsData {
   snacks: MealItem[]; 
 }
 
-const initialMockMeals: MealsData = {
+// Updated to use nameKey
+const initialMockMeals: (translations: Translations) => MealsData = (translations) => ({
   breakfast: [
-    { id: 'b1', name: 'Oatmeal with Berries', quantity: '1 cup (240g)', calories: '320 kcal', pfc: 'P: 12g | C: 58g | F: 6g', iconUrl: 'https://placehold.co/40x40/A8D5BA/333333.png?text=O', dataAiHint: 'oatmeal berries' },
-    { id: 'b2', name: 'Orange Juice', quantity: '1 glass (240ml)', calories: '130 kcal', pfc: 'P: 2g | C: 30g | F: 0g', iconUrl: 'https://placehold.co/40x40/FFDDA2/333333.png?text=J', dataAiHint: 'orange juice' },
+    { id: 'b1', nameKey: 'mealNameOatmealWithBerries', quantity: '1 cup (240g)', calories: '320 kcal', pfc: 'P: 12g | C: 58g | F: 6g', iconUrl: 'https://placehold.co/40x40/A8D5BA/333333.png?text=O', dataAiHint: 'oatmeal berries' },
+    { id: 'b2', nameKey: 'mealNameOrangeJuice', quantity: '1 glass (240ml)', calories: '130 kcal', pfc: 'P: 2g | C: 30g | F: 0g', iconUrl: 'https://placehold.co/40x40/FFDDA2/333333.png?text=J', dataAiHint: 'orange juice' },
   ],
   lunch: [
-    { id: 'l1', name: 'Grilled Chicken Salad', quantity: '1 bowl (350g)', calories: '420 kcal', pfc: 'P: 35g | C: 25g | F: 22g', iconUrl: 'https://placehold.co/40x40/C5E1A5/333333.png?text=S', dataAiHint: 'chicken salad' },
-    { id: 'l2', name: 'Whole Grain Bread', quantity: '1 slice (40g)', calories: '100 kcal', pfc: 'P: 4g | C: 15g | F: 1g', iconUrl: 'https://placehold.co/40x40/E6B980/333333.png?text=B', dataAiHint: 'grain bread' },
-    { id: 'l3', name: 'Apple', quantity: '1 medium (182g)', calories: '100 kcal', pfc: 'P: 0g | C: 25g | F: 0g', iconUrl: 'https://placehold.co/40x40/FFABAB/333333.png?text=A', dataAiHint: 'apple fruit' },
+    { id: 'l1', nameKey: 'mealNameGrilledChickenSalad', quantity: '1 bowl (350g)', calories: '420 kcal', pfc: 'P: 35g | C: 25g | F: 22g', iconUrl: 'https://placehold.co/40x40/C5E1A5/333333.png?text=S', dataAiHint: 'chicken salad' },
+    { id: 'l2', nameKey: 'mealNameWholeGrainBread', quantity: '1 slice (40g)', calories: '100 kcal', pfc: 'P: 4g | C: 15g | F: 1g', iconUrl: 'https://placehold.co/40x40/E6B980/333333.png?text=B', dataAiHint: 'grain bread' },
+    { id: 'l3', nameKey: 'mealNameApple', quantity: '1 medium (182g)', calories: '100 kcal', pfc: 'P: 0g | C: 25g | F: 0g', iconUrl: 'https://placehold.co/40x40/FFABAB/333333.png?text=A', dataAiHint: 'apple fruit' },
   ],
   dinner: [
-    { id: 'd1', name: 'Vegetable Soup', quantity: '1 bowl (300ml)', calories: '180 kcal', pfc: 'P: 8g | C: 20g | F: 8g', iconUrl: 'https://placehold.co/40x40/FFCC80/333333.png?text=S', dataAiHint: 'vegetable soup' },
-    { id: 'd2', name: 'Baked Salmon', quantity: '1 fillet (100g)', calories: '200 kcal', pfc: 'P: 22g | C: 0g | F: 12g', iconUrl: 'https://placehold.co/40x40/ADD8E6/333333.png?text=F', dataAiHint: 'baked salmon' },
+    { id: 'd1', nameKey: 'mealNameVegetableSoup', quantity: '1 bowl (300ml)', calories: '180 kcal', pfc: 'P: 8g | C: 20g | F: 8g', iconUrl: 'https://placehold.co/40x40/FFCC80/333333.png?text=S', dataAiHint: 'vegetable soup' },
+    { id: 'd2', nameKey: 'mealNameBakedSalmon', quantity: '1 fillet (100g)', calories: '200 kcal', pfc: 'P: 22g | C: 0g | F: 12g', iconUrl: 'https://placehold.co/40x40/ADD8E6/333333.png?text=F', dataAiHint: 'baked salmon' },
   ],
   snacks: [],
-};
+});
 
 type MealCategoryKey = keyof MealsData;
 
 interface TodaysMealsSectionProps {
   translations: Translations;
-  language: Language; // Add language prop
+  language: Language;
 }
 
 export function TodaysMealsSection({ translations, language }: TodaysMealsSectionProps) {
   const [currentDate, setCurrentDate] = useState(new Date(2023, 4, 15)); // Month is 0-indexed, so 4 is May
-  const [mealsData, setMealsData] = useState<MealsData>(initialMockMeals); 
+  // Initialize mealsData using translations
+  const [mealsData, setMealsData] = useState<MealsData>(() => initialMockMeals(translations)); 
+
+  // Update mealsData if translations change (e.g., language switch)
+  // This is important if initialMockMeals relies on translations for keys, though here it's for values
+  // For this specific case where we translate names, we need to rebuild if language changes
+  useState(() => {
+     setMealsData(initialMockMeals(translations));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [translations]);
+
 
   const mealTitles: Record<MealCategoryKey, string> = {
     breakfast: translations.breakfast,
@@ -70,12 +81,17 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
     setCurrentDate(prevDate => {
       const newDate = new Date(prevDate);
       newDate.setDate(newDate.getDate() + offset);
+      // Here you would typically fetch new meal data for the newDate
+      // For now, we'll just keep the same mock data
       return newDate;
     });
   };
 
   const getTotalCalories = (category: MealCategoryKey) => {
-    return mealsData[category].reduce((sum, item) => sum + parseInt(item.calories), 0);
+    return mealsData[category].reduce((sum, item) => {
+        const calValue = parseInt(item.calories.replace(translations.kcalUnit, '').replace('kcal', ''));
+        return sum + (isNaN(calValue) ? 0 : calValue);
+    }, 0);
   }
 
   return (
@@ -106,9 +122,9 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
                 {mealsData[category].map(item => (
                   <Card key={item.id} className="p-3 flex items-center justify-between bg-card hover:shadow-sm transition-shadow border border-border/70">
                     <div className="flex items-center gap-3">
-                      <Image src={item.iconUrl} alt={item.name} width={32} height={32} className="rounded-full" data-ai-hint={item.dataAiHint} />
+                      <Image src={item.iconUrl} alt={translations[item.nameKey] || item.nameKey} width={32} height={32} className="rounded-full" data-ai-hint={item.dataAiHint} />
                       <div>
-                        <p className="text-sm font-medium">{item.name}</p> 
+                        <p className="text-sm font-medium">{translations[item.nameKey] || item.nameKey}</p> 
                         <p className="text-xs text-muted-foreground">{item.quantity}</p>
                       </div>
                     </div>
@@ -133,3 +149,6 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
     </Card>
   );
 }
+
+
+    

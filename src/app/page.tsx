@@ -61,11 +61,18 @@ export const translations = {
     snacks: "Snacks",
     kcalUnit: "kcal",
     noMealsLogged: "No {mealType} logged yet.",
+    mealNameOatmealWithBerries: "Oatmeal with Berries",
+    mealNameOrangeJuice: "Orange Juice",
+    mealNameGrilledChickenSalad: "Grilled Chicken Salad",
+    mealNameWholeGrainBread: "Whole Grain Bread",
+    mealNameApple: "Apple", // Used as a meal item here
+    mealNameVegetableSoup: "Vegetable Soup",
+    mealNameBakedSalmon: "Baked Salmon",
     // QuickAddFoodSection
     quickAddFoodTitle: "Quick Add Food",
-    oatmeal: "Oatmeal",
+    oatmeal: "Oatmeal", // Used as a quick add item
     salad: "Salad",
-    apple: "Apple",
+    apple: "Apple", // Used as a quick add item
     milk: "Milk",
     more: "More",
     takePhoto: "Take Photo",
@@ -122,7 +129,7 @@ export const translations = {
     switchToEnglishButtonText: "English",
     readPersonalStatement: "請在此瀏覽我的個人自述",
     // Personal Statement Dialog (Titles for the statement itself are always English)
-    personalStatementDialogTitle: "個人自述",
+    personalStatementDialogTitle: "個人自述", // This title is translated
     personalStatementWhyTitle: "Why I would like to become a dietitian", // English Title
     personalStatementWhyBody: "Eating is something we do every day, yet food is far more than fuel—it's a fundamental component of well-being, a preventive measure against chronic diseases, and a gateway to better quality of life. By helping people make informed food choices, we can improve their wellbeing. In Hong Kong, the aging population poses a significant public health challenge, making effective nutrition strategies essential. As the demand for dietitians grows, I am eager to join this field, aiming to enhance health outcomes for individuals of all ages and support the community in making better dietary choices.",
     personalStatementExperienceTitle: "Relevant experience and strength", // English Title
@@ -149,7 +156,7 @@ export const translations = {
     dietitianRecommendationsTitle: "營養師建議",
     recTextLeafyGreens: "嘗試在午餐中加入更多綠葉蔬菜，有助於控制血糖水平。",
     recTextSodium: "考慮通過避免加工食品來減少鈉的攝入量。",
-    recTextCalcium: "您的鈣攝入量低於建議水平。嘗試添加更多乳製品或強化替代品。",
+    recTextCalcium: "您的鈣攝入量低於建議水平。嘗試添加更多乳制品或強化替代品。",
     // MainContentArea
     // TodaysMealsSection
     todaysMealsTitle: "今日膳食",
@@ -160,11 +167,18 @@ export const translations = {
     snacks: "零食",
     kcalUnit: "千卡",
     noMealsLogged: "{mealType}尚未記錄。",
+    mealNameOatmealWithBerries: "燕麥配漿果",
+    mealNameOrangeJuice: "橙汁",
+    mealNameGrilledChickenSalad: "烤雞沙律",
+    mealNameWholeGrainBread: "全麥麵包",
+    mealNameApple: "蘋果", // 用作膳食項目
+    mealNameVegetableSoup: "蔬菜湯",
+    mealNameBakedSalmon: "烤三文魚",
     // QuickAddFoodSection
     quickAddFoodTitle: "快速新增食物",
-    oatmeal: "燕麥片",
+    oatmeal: "燕麥片", // 用作快速新增項目
     salad: "沙律",
-    apple: "蘋果",
+    apple: "蘋果", // 用作快速新增項目
     milk: "牛奶",
     more: "更多",
     takePhoto: "拍照新增",
@@ -215,7 +229,7 @@ export type Translations = typeof translations.en;
 export type Language = keyof typeof translations;
 
 export default function NutriTrackDashboardPage() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Set to false by default, or true if you have an initial loading phase
   const [language, setLanguage] = useState<Language>('en');
   const currentTranslations = translations[language];
 
@@ -229,10 +243,11 @@ export default function NutriTrackDashboardPage() {
   };
 
   if (!isClient) {
+    // Display a consistent loading state that doesn't depend on `currentTranslations` yet
     return (
         <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50">
             <Loader2 className="h-12 w-12 text-primary animate-spin" />
-            <p className="ml-4 text-lg text-primary">{translations.en.loadingText}</p>
+            <p className="ml-4 text-lg text-primary">{translations.en.loadingText}</p> {/* Default to English for initial load */}
         </div>
     );
   }
@@ -264,5 +279,7 @@ export default function NutriTrackDashboardPage() {
     </div>
   );
 }
+
+    
 
     
