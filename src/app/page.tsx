@@ -7,7 +7,7 @@ import { LeftSidebar } from '@/components/dashboard/left-sidebar';
 import { MainContentArea } from '@/components/dashboard/main-content-area';
 import { RightSidebar } from '@/components/dashboard/right-sidebar';
 import { AppFooter } from '@/components/layout/app-footer';
-import { PersonalStatementDisplay } from '@/components/layout/personal-statement-display'; // New import
+import { PersonalStatementDisplay } from '@/components/layout/personal-statement-display';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 
@@ -22,19 +22,19 @@ export const translations = {
     logOut: "Log out",
     switchToChineseButtonText: "繁體中文",
     readPersonalStatement: "Read My Personal Statement Here",
-    // Personal Statement
+    // Personal Statement Dialog
     personalStatementDialogTitle: "Personal Statement",
-    personalStatementWhyTitle: "Why I would like to become a dietitian",
+    personalStatementWhyTitle: "Why I would like to become a dietitian", // English Title
     personalStatementWhyBody: "Eating is something we do every day, yet food is far more than fuel—it's a fundamental component of well-being, a preventive measure against chronic diseases, and a gateway to better quality of life. By helping people make informed food choices, we can improve their wellbeing. In Hong Kong, the aging population poses a significant public health challenge, making effective nutrition strategies essential. As the demand for dietitians grows, I am eager to join this field, aiming to enhance health outcomes for individuals of all ages and support the community in making better dietary choices.",
-    personalStatementExperienceTitle: "Relevant experience and strength",
+    personalStatementExperienceTitle: "Relevant experience and strength", // English Title
     personalStatementExperienceBody: "My past work and volunteer experience at hospitals and community centers has given me a deep understanding of the role of a dietitian in both clinical and community settings. Through these experiences, I have learned how dietitians assess nutritional needs, develop tailored plans, and support individuals in making healthier choices. This hands-on exposure has solidified my commitment to this profession.\nI possess a diverse set of relevant skills and strengths that are essential for becoming a dietitian. My strong communication skills enable me to convey complex nutritional information clearly and effectively, ensuring that patients understand their dietary needs and recommendations. I also excel in active listening, which allows me to truly understand patients’ concerns and preferences.",
-    personalStatementGoalsTitle: "My career goals",
+    personalStatementGoalsTitle: "My career goals", // English Title
     personalStatementGoalsBody: "I am passionate about working on the front lines of healthcare to provide tailored dietary guidance that empowers individuals to make informed and sustainable changes. My goal is to offer patient-centered nutrition plans that consider each patient's medical condition, lifestyle, and cultural context. I also aim to take part in primary intervention strategies that reduce the incidence of preventable diseases through early nutritional support and public education. I am eager to develop outreach programs that promote food literacy, healthy eating habits, and community wellness. Moreover, I am enthusiastic about the growing role of digital health tools and artificial intelligence in dietetics. From personalized meal planning apps to predictive analytics for nutritional risk assessment, I see tremendous potential for technology to enhance care delivery.",
-    personalStatementReasonsTitle: "Reasons for applying for this course",
+    personalStatementReasonsTitle: "Reasons for applying for this course", // English Title
     personalStatementReasonsBody: "I am drawn to this program for its excellent reputation in the field, as well as its emphasis on both academic and practical training. The opportunity to engage in a full-time placement in a hospital is particularly appealing. Training in local settings will benefit my long-term goal of practicing in Hong Kong by helping me understand the regional healthcare systems, patient expectations, and food cultures. This knowledge will enable me to provide more relevant and effective care in the future. Moreover, the part-time structure of the first year aligns well with my current professional commitments and gives me the flexibility to remain active in the field while deepening my academic knowledge.",
-    personalStatementConclusionTitle: "Conclusion",
+    personalStatementConclusionTitle: "Conclusion", // English Title
     personalStatementConclusionBody: "With my strong background in nutrition and a clear vision for the future, I believe I am well-suited for this program. I am eager to learn from the professionals at HKUSPACE and integrate their insights to promote better health and well-being in our communities.",
-    personalStatementThanks: "Thank you for considering my application. I look forward to discussing my application and aspirations in more detail during an interview.",
+    personalStatementThanks: "Thank you for considering my application. I look forward to discussing my application and aspirations in more detail during an interview.", // English Text
     closeButtonText: "Close",
     // LeftSidebar
     chatWithDietitian: "Chat with Dietitian",
@@ -95,7 +95,7 @@ export const translations = {
     timeToday: "Today",
     timeYesterday: "Yesterday",
     // Language Selector (Now button)
-    language: "Language", // Retained for consistency, though UI element changes
+    language: "Language", 
     // Footer
     footerCredit: "This demo webpage was created and designed by Anson Hung for the application to Postgraduate Diploma in Human Nutrition and Postgraduate Diploma in Dietetics.",
   },
@@ -109,20 +109,20 @@ export const translations = {
     logOut: "登出",
     switchToEnglishButtonText: "English",
     readPersonalStatement: "請在此瀏覽我的個人自述",
-    // Personal Statement (Using English text as placeholder for body content)
-    personalStatementDialogTitle: "個人自述",
-    personalStatementWhyTitle: "為何我想成為一名營養師",
+    // Personal Statement Dialog
+    personalStatementDialogTitle: "個人自述", // Translated Dialog Title
+    personalStatementWhyTitle: "Why I would like to become a dietitian", // English Title
     personalStatementWhyBody: "Eating is something we do every day, yet food is far more than fuel—it's a fundamental component of well-being, a preventive measure against chronic diseases, and a gateway to better quality of life. By helping people make informed food choices, we can improve their wellbeing. In Hong Kong, the aging population poses a significant public health challenge, making effective nutrition strategies essential. As the demand for dietitians grows, I am eager to join this field, aiming to enhance health outcomes for individuals of all ages and support the community in making better dietary choices.",
-    personalStatementExperienceTitle: "相關經驗與能力",
+    personalStatementExperienceTitle: "Relevant experience and strength", // English Title
     personalStatementExperienceBody: "My past work and volunteer experience at hospitals and community centers has given me a deep understanding of the role of a dietitian in both clinical and community settings. Through these experiences, I have learned how dietitians assess nutritional needs, develop tailored plans, and support individuals in making healthier choices. This hands-on exposure has solidified my commitment to this profession.\nI possess a diverse set of relevant skills and strengths that are essential for becoming a dietitian. My strong communication skills enable me to convey complex nutritional information clearly and effectively, ensuring that patients understand their dietary needs and recommendations. I also excel in active listening, which allows me to truly understand patients’ concerns and preferences.",
-    personalStatementGoalsTitle: "我的職業目標",
+    personalStatementGoalsTitle: "My career goals", // English Title
     personalStatementGoalsBody: "I am passionate about working on the front lines of healthcare to provide tailored dietary guidance that empowers individuals to make informed and sustainable changes. My goal is to offer patient-centered nutrition plans that consider each patient's medical condition, lifestyle, and cultural context. I also aim to take part in primary intervention strategies that reduce the incidence of preventable diseases through early nutritional support and public education. I am eager to develop outreach programs that promote food literacy, healthy eating habits, and community wellness. Moreover, I am enthusiastic about the growing role of digital health tools and artificial intelligence in dietetics. From personalized meal planning apps to predictive analytics for nutritional risk assessment, I see tremendous potential for technology to enhance care delivery.",
-    personalStatementReasonsTitle: "申請此課程的原因",
+    personalStatementReasonsTitle: "Reasons for applying for this course", // English Title
     personalStatementReasonsBody: "I am drawn to this program for its excellent reputation in the field, as well as its emphasis on both academic and practical training. The opportunity to engage in a full-time placement in a hospital is particularly appealing. Training in local settings will benefit my long-term goal of practicing in Hong Kong by helping me understand the regional healthcare systems, patient expectations, and food cultures. This knowledge will enable me to provide more relevant and effective care in the future. Moreover, the part-time structure of the first year aligns well with my current professional commitments and gives me the flexibility to remain active in the field while deepening my academic knowledge.",
-    personalStatementConclusionTitle: "結論",
+    personalStatementConclusionTitle: "Conclusion", // English Title
     personalStatementConclusionBody: "With my strong background in nutrition and a clear vision for the future, I believe I am well-suited for this program. I am eager to learn from the professionals at HKUSPACE and integrate their insights to promote better health and well-being in our communities.",
-    personalStatementThanks: "感謝您考慮我的申請。我期待在面試中更詳細地討論我的申請和期望。",
-    closeButtonText: "關閉",
+    personalStatementThanks: "Thank you for considering my application. I look forward to discussing my application and aspirations in more detail during an interview.", // English Text
+    closeButtonText: "關閉", // Translated Button
     // LeftSidebar
     chatWithDietitian: "與營養師聊天",
     userConditionExample: "二型糖尿病，高血壓",
@@ -194,7 +194,7 @@ export type Language = keyof typeof translations;
 export default function NutriTrackDashboardPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [language, setLanguage] = useState<Language>('en');
-  const [showPersonalStatement, setShowPersonalStatement] = useState(false); // New state
+  const [showPersonalStatement, setShowPersonalStatement] = useState(false);
   const currentTranslations = translations[language];
 
   const [isClient, setIsClient] = useState(false);
@@ -252,5 +252,3 @@ export default function NutriTrackDashboardPage() {
     </div>
   );
 }
-
-    
