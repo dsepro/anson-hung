@@ -1,7 +1,7 @@
 
 "use client";
 import Link from 'next/link';
-import { Leaf, ChevronDown, Edit3, User, ArrowLeft } from 'lucide-react';
+import { Leaf, ChevronDown, Edit3, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar } from '@/components/ui/avatar';
 import {
@@ -35,7 +35,7 @@ export function AppHeader({
   const buttonText = currentLanguage === 'en' ? translations.switchToChineseButtonText : translations.switchToEnglishButtonText;
 
   return (
-    <header className="bg-card shadow-sm sticky top-0 z-40 h-auto sm:h-16 py-2 sm:py-0">
+    <header className="bg-card shadow-sm sticky top-0 z-40 py-3">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col sm:flex-row items-start sm:items-center justify-between">
         <Link href="/" className="flex items-center gap-2 text-primary mb-2 sm:mb-0">
           <Leaf className="h-6 w-6 sm:h-7 sm:w-7" />
@@ -44,8 +44,8 @@ export function AppHeader({
           </span>
         </Link>
 
-        <div className="flex flex-col items-stretch w-full sm:w-auto sm:flex-row sm:items-center gap-2 mt-2 sm:mt-0">
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+        <div className="flex flex-col items-stretch w-full sm:w-auto sm:flex-row sm:items-center gap-3 mt-3 sm:mt-0">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <Button
               variant="outline"
               onClick={onToggleLanguage}

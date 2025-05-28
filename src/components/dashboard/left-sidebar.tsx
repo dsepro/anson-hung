@@ -5,7 +5,7 @@ import { DailyGoalsCard } from './daily-goals-card';
 import { DietitianRecommendationsCard } from './dietitian-recommendations-card';
 import { Button } from '@/components/ui/button';
 import { MessageSquare } from 'lucide-react';
-import type { Translations } from '@/lib/translations'; // Updated import
+import type { Translations } from '@/lib/translations';
 
 interface LeftSidebarProps {
   translations: Translations;
@@ -13,17 +13,10 @@ interface LeftSidebarProps {
 
 export function LeftSidebar({ translations }: LeftSidebarProps) {
   const userName = translations.userNameDisplay;
-  const userInitials = userName
-    .split(' ')
-    .map(n => n[0])
-    .join('')
-    .toUpperCase();
 
   const mockUser = {
     name: userName,
-    condition: translations.userConditionExample, 
-    avatarUrl: "https://placehold.co/80x80.png", 
-    avatarFallback: userInitials,
+    condition: translations.userConditionExample,
   };
 
   const mockGoals = [
@@ -51,7 +44,7 @@ export function LeftSidebar({ translations }: LeftSidebarProps) {
   }));
 
   return (
-    <aside className="w-full md:w-1/4 lg:w-1/5 xl:w-[22%] md:flex-shrink-0 p-4 space-y-6 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto bg-card md:bg-transparent md:border-r border-border/60">
+    <aside className="w-full md:w-1/4 lg:w-1/5 xl:w-[22%] md:flex-shrink-0 p-4 space-y-6 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto bg-transparent md:border-r border-border/60">
       <UserProfileCard user={mockUser} />
       <DailyGoalsCard goals={translatedGoals} translations={translations} />
       <DietitianRecommendationsCard 
