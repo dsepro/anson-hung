@@ -18,7 +18,6 @@ import type { Translations, Language } from '@/app/page';
 interface AppHeaderProps {
   currentLanguage: Language;
   onToggleLanguage: () => void;
-  onTogglePersonalStatement: () => void; // New prop
   userName?: string;
   userAvatar?: string;
   translations: Translations;
@@ -27,7 +26,6 @@ interface AppHeaderProps {
 export function AppHeader({
   currentLanguage,
   onToggleLanguage,
-  onTogglePersonalStatement, // New prop
   userName = "John Doe",
   userAvatar,
   translations
@@ -37,6 +35,10 @@ export function AppHeader({
     .map(n => n[0])
     .join('')
     .toUpperCase();
+
+  const openPersonalStatement = () => {
+    window.open('/personal-statement', '_blank');
+  };
 
   return (
     <header className="bg-card shadow-sm sticky top-0 z-40 h-16">
@@ -55,7 +57,7 @@ export function AppHeader({
           />
           <Button
             variant="outline"
-            onClick={onTogglePersonalStatement}
+            onClick={openPersonalStatement}
             className="h-9 text-xs sm:text-sm px-2 sm:px-3"
             aria-label={translations.readPersonalStatement}
           >
@@ -87,5 +89,3 @@ export function AppHeader({
     </header>
   );
 }
-
-    
