@@ -1,43 +1,52 @@
 
 "use client";
-import { useState, useEffect } from 'react'; // Added useEffect
+
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight, PlusCircle } from 'lucide-react';
-import Image from 'next/image';
+import {
+  ChevronLeft,
+  ChevronRight,
+  PlusCircle,
+  Apple,
+  GlassWater,
+  Salad,
+  Sandwich,
+  Soup,
+  Fish,
+} from 'lucide-react';
+// import Image from 'next/image'; // Removed Image import
 import type { Translations, Language } from '@/app/page';
 
 interface MealItem {
   id: string;
-  nameKey: keyof Translations; // Changed from name
+  nameKey: keyof Translations;
   quantity: string;
   calories: string;
   pfc: string; // Protein, Fat, Carbs
-  iconUrl: string;
-  dataAiHint: string;
+  icon: React.ElementType; // Changed from iconUrl to icon ElementType
 }
 
 interface MealsData {
   breakfast: MealItem[];
   lunch: MealItem[];
   dinner: MealItem[];
-  snacks: MealItem[]; 
+  snacks: MealItem[];
 }
 
-// Updated to use nameKey
 const initialMockMeals: (translations: Translations) => MealsData = (translations) => ({
   breakfast: [
-    { id: 'b1', nameKey: 'mealNameOatmealWithBerries', quantity: '1 cup (240g)', calories: '320 kcal', pfc: 'P: 12g | C: 58g | F: 6g', iconUrl: 'https://placehold.co/40x40/A8D5BA/333333.png?text=O', dataAiHint: 'oatmeal berries' },
-    { id: 'b2', nameKey: 'mealNameOrangeJuice', quantity: '1 glass (240ml)', calories: '130 kcal', pfc: 'P: 2g | C: 30g | F: 0g', iconUrl: 'https://placehold.co/40x40/FFDDA2/333333.png?text=J', dataAiHint: 'orange juice' },
+    { id: 'b1', nameKey: 'mealNameOatmealWithBerries', quantity: '1 cup (240g)', calories: '320 kcal', pfc: 'P: 12g | C: 58g | F: 6g', icon: Apple },
+    { id: 'b2', nameKey: 'mealNameOrangeJuice', quantity: '1 glass (240ml)', calories: '130 kcal', pfc: 'P: 2g | C: 30g | F: 0g', icon: GlassWater },
   ],
   lunch: [
-    { id: 'l1', nameKey: 'mealNameGrilledChickenSalad', quantity: '1 bowl (350g)', calories: '420 kcal', pfc: 'P: 35g | C: 25g | F: 22g', iconUrl: 'https://placehold.co/40x40/C5E1A5/333333.png?text=S', dataAiHint: 'chicken salad' },
-    { id: 'l2', nameKey: 'mealNameWholeGrainBread', quantity: '1 slice (40g)', calories: '100 kcal', pfc: 'P: 4g | C: 15g | F: 1g', iconUrl: 'https://placehold.co/40x40/E6B980/333333.png?text=B', dataAiHint: 'grain bread' },
-    { id: 'l3', nameKey: 'mealNameApple', quantity: '1 medium (182g)', calories: '100 kcal', pfc: 'P: 0g | C: 25g | F: 0g', iconUrl: 'https://placehold.co/40x40/FFABAB/333333.png?text=A', dataAiHint: 'apple fruit' },
+    { id: 'l1', nameKey: 'mealNameGrilledChickenSalad', quantity: '1 bowl (350g)', calories: '420 kcal', pfc: 'P: 35g | C: 25g | F: 22g', icon: Salad },
+    { id: 'l2', nameKey: 'mealNameWholeGrainBread', quantity: '1 slice (40g)', calories: '100 kcal', pfc: 'P: 4g | C: 15g | F: 1g', icon: Sandwich },
+    { id: 'l3', nameKey: 'mealNameApple', quantity: '1 medium (182g)', calories: '100 kcal', pfc: 'P: 0g | C: 25g | F: 0g', icon: Apple },
   ],
   dinner: [
-    { id: 'd1', nameKey: 'mealNameVegetableSoup', quantity: '1 bowl (300ml)', calories: '180 kcal', pfc: 'P: 8g | C: 20g | F: 8g', iconUrl: 'https://placehold.co/40x40/FFCC80/333333.png?text=S', dataAiHint: 'vegetable soup' },
-    { id: 'd2', nameKey: 'mealNameBakedSalmon', quantity: '1 fillet (100g)', calories: '200 kcal', pfc: 'P: 22g | C: 0g | F: 12g', iconUrl: 'https://placehold.co/40x40/ADD8E6/333333.png?text=F', dataAiHint: 'baked salmon' },
+    { id: 'd1', nameKey: 'mealNameVegetableSoup', quantity: '1 bowl (300ml)', calories: '180 kcal', pfc: 'P: 8g | C: 20g | F: 8g', icon: Soup },
+    { id: 'd2', nameKey: 'mealNameBakedSalmon', quantity: '1 fillet (100g)', calories: '200 kcal', pfc: 'P: 22g | C: 0g | F: 12g', icon: Fish },
   ],
   snacks: [],
 });
@@ -50,17 +59,14 @@ interface TodaysMealsSectionProps {
 }
 
 export function TodaysMealsSection({ translations, language }: TodaysMealsSectionProps) {
-  const [currentDate, setCurrentDate] = useState<Date | null>(null); // Initialize with null
-  // Initialize mealsData using translations
-  const [mealsData, setMealsData] = useState<MealsData>(() => initialMockMeals(translations)); 
+  const [currentDate, setCurrentDate] = useState<Date | null>(null);
+  const [mealsData, setMealsData] = useState<MealsData>(() => initialMockMeals(translations));
 
   useEffect(() => {
-    // Set current date only on the client side to avoid hydration mismatch
     setCurrentDate(new Date());
   }, []);
-  
-  // Update mealsData if translations change (e.g., language switch)
-  useEffect(() => { // Changed from useState to useEffect
+
+  useEffect(() => {
      setMealsData(initialMockMeals(translations));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [translations]);
@@ -74,7 +80,7 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
   };
 
   const formatDate = (date: Date | null) => {
-    if (!date) return ""; // Handle null case
+    if (!date) return "";
     if (language === 'zh') {
         return date.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' });
     }
@@ -83,11 +89,9 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
 
   const changeDate = (offset: number) => {
     setCurrentDate(prevDate => {
-      if (!prevDate) return null; // Should not happen if initialized correctly
+      if (!prevDate) return null;
       const newDate = new Date(prevDate);
       newDate.setDate(newDate.getDate() + offset);
-      // Here you would typically fetch new meal data for the newDate
-      // For now, we'll just keep the same mock data
       return newDate;
     });
   };
@@ -100,10 +104,7 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
   }
 
   if (!currentDate) {
-    // You might want to render a loading state or null here
-    // until the date is set on the client.
-    // For simplicity, returning null for now.
-    return null; 
+    return null;
   }
 
   return (
@@ -131,21 +132,26 @@ export function TodaysMealsSection({ translations, language }: TodaysMealsSectio
             </div>
             {mealsData[category].length > 0 ? (
               <div className="space-y-3">
-                {mealsData[category].map(item => (
-                  <Card key={item.id} className="p-3 flex items-center justify-between bg-card hover:shadow-sm transition-shadow border border-border/70">
-                    <div className="flex items-center gap-3">
-                      <Image src={item.iconUrl} alt={translations[item.nameKey] || item.nameKey} width={32} height={32} className="rounded-full" data-ai-hint={item.dataAiHint} />
-                      <div>
-                        <p className="text-sm font-medium">{translations[item.nameKey] || item.nameKey}</p> 
-                        <p className="text-xs text-muted-foreground">{item.quantity}</p>
+                {mealsData[category].map(item => {
+                  const IconComponent = item.icon;
+                  return (
+                    <Card key={item.id} className="p-3 flex items-center justify-between bg-card hover:shadow-sm transition-shadow border border-border/70">
+                      <div className="flex items-center gap-3">
+                        <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                          <IconComponent className="h-5 w-5 text-primary" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">{translations[item.nameKey] || item.nameKey}</p>
+                          <p className="text-xs text-muted-foreground">{item.quantity}</p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm font-semibold">{item.calories.replace('kcal', translations.kcalUnit)}</p>
-                      <p className="text-xs text-muted-foreground">{item.pfc}</p>
-                    </div>
-                  </Card>
-                ))}
+                      <div className="text-right">
+                        <p className="text-sm font-semibold">{item.calories.replace('kcal', translations.kcalUnit)}</p>
+                        <p className="text-xs text-muted-foreground">{item.pfc}</p>
+                      </div>
+                    </Card>
+                  );
+                })}
               </div>
             ) : (
               <p className="text-xs text-muted-foreground italic text-center py-2">
