@@ -69,7 +69,12 @@ export const translations = {
     scanBarcode: "Scan Barcode",
     // NutritionSummarySection
     nutritionSummaryTitle: "Nutrition Summary",
-    nutritionSummaryPlaceholder: "Detailed nutrition summary chart will be displayed here.",
+    carbohydratesChartLabel: "Carbs (g)",
+    proteinChartLabel: "Protein (g)",
+    fatChartLabel: "Fat (g)",
+    vitaminCChartLabel: "Vit C (mg)",
+    ironChartLabel: "Iron (mg)",
+    calciumChartLabel: "Calcium (mg)",
     // RightSidebar
     // MealPlanningCard
     mealPlanningTitle: "Meal Planning",
@@ -95,7 +100,7 @@ export const translations = {
     timeToday: "Today",
     timeYesterday: "Yesterday",
     // Language Selector (Now button)
-    language: "Language", 
+    language: "Language",
     // Footer
     footerCredit: "This demo webpage was created and designed by Anson Hung for the application to Postgraduate Diploma in Human Nutrition and Postgraduate Diploma in Dietetics.",
   },
@@ -156,7 +161,12 @@ export const translations = {
     scanBarcode: "掃描條碼",
     // NutritionSummarySection
     nutritionSummaryTitle: "營養總結",
-    nutritionSummaryPlaceholder: "詳細的營養總結圖表將在此處顯示。",
+    carbohydratesChartLabel: "碳水 (克)",
+    proteinChartLabel: "蛋白 (克)",
+    fatChartLabel: "脂肪 (克)",
+    vitaminCChartLabel: "維他命C (毫克)",
+    ironChartLabel: "鐵質 (毫克)",
+    calciumChartLabel: "鈣質 (毫克)",
     // RightSidebar
     // MealPlanningCard
     mealPlanningTitle: "膳食計劃",
