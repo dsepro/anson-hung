@@ -1,7 +1,7 @@
 
 "use client";
 import Link from 'next/link';
-import { Leaf, ChevronDown, Edit3, User, Globe } from 'lucide-react'; // Added Globe
+import { Leaf, ChevronDown, Edit3, User, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar } from '@/components/ui/avatar';
 import {
@@ -53,11 +53,11 @@ export function AppHeader({
             <Globe className="h-5 w-5" />
           </Button>
           <Button
-            variant="secondary" // Changed from "outline"
+            variant="secondary" 
             size="default" 
             onClick={openPersonalStatementInNewWindow}
-            className="text-xs sm:text-sm w-full sm:w-auto h-10" // Ensure consistent height
-            aria-label={translations.personalStatement} // Using updated translation key
+            className="text-xs sm:text-sm w-full sm:w-auto h-10"
+            aria-label={translations.personalStatement}
           >
             <Edit3 className="mr-1.5 h-4 w-4" />
             {translations.personalStatement} 
