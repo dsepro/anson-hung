@@ -45,22 +45,22 @@ export function AppHeader({
         <div className="flex flex-col items-stretch w-full sm:w-auto sm:flex-row sm:items-center gap-3 mt-3 sm:mt-0">
           <Button
             variant="outline"
-            size="icon" // Changed to icon size
+            size="icon"
             onClick={onToggleLanguage}
-            className="w-full sm:w-auto" // Adjusted width classes
+            className="w-full sm:w-auto h-10" 
             aria-label={currentLanguage === 'en' ? "Switch to Traditional Chinese" : "Switch to English"}
           >
             <Globe className="h-5 w-5" />
           </Button>
           <Button
-            variant="outline"
-            size="default" // Changed to default size for h-10 consistency
+            variant="secondary" // Changed from "outline"
+            size="default" 
             onClick={openPersonalStatementInNewWindow}
-            className="text-xs sm:text-sm w-full sm:w-auto"
-            aria-label={translations.readPersonalStatement}
+            className="text-xs sm:text-sm w-full sm:w-auto h-10" // Ensure consistent height
+            aria-label={translations.personalStatement} // Using updated translation key
           >
             <Edit3 className="mr-1.5 h-4 w-4" />
-            {translations.readPersonalStatement}
+            {translations.personalStatement} 
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
