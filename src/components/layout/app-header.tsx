@@ -45,26 +45,30 @@ export function AppHeader({
         <div className="flex flex-col items-stretch w-full sm:w-auto sm:flex-row sm:items-center gap-3 mt-3 sm:mt-0">
           <Button
             variant="outline"
-            size="icon"
+            size="icon" // Defines h-10 w-10
             onClick={onToggleLanguage}
-            className="w-full sm:w-auto h-10" 
+            className="w-full sm:w-auto" // On sm+, sm:w-auto allows w-10. On mobile, w-full.
             aria-label={currentLanguage === 'en' ? "Switch to Traditional Chinese" : "Switch to English"}
           >
             <Globe className="h-5 w-5" />
           </Button>
           <Button
-            variant="secondary" 
-            size="default" 
+            variant="secondary"
+            size="default" // Defines h-10, px-4 py-2
             onClick={openPersonalStatementInNewWindow}
-            className="text-xs sm:text-sm w-full sm:w-auto h-10"
+            className="text-xs sm:text-sm w-full sm:w-auto" // On sm+, sm:w-auto for content width. On mobile, w-full.
             aria-label={translations.personalStatement}
           >
             <Edit3 className="mr-1.5 h-4 w-4" />
-            {translations.personalStatement} 
+            {translations.personalStatement}
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="flex items-center gap-2 h-10 px-2 w-full sm:w-auto justify-center sm:justify-start">
+              <Button
+                variant="ghost"
+                size="default" // Defines h-10, px-4 py-2
+                className="flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start"
+              >
                 <Avatar className="h-8 w-8 bg-primary text-primary-foreground flex items-center justify-center" data-ai-hint="profile avatar user">
                    <User className="h-5 w-5" />
                 </Avatar>
