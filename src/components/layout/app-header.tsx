@@ -34,20 +34,16 @@ export function AppHeader({
 
   return (
     <header className="bg-card shadow-sm sticky top-0 z-40 py-3">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 text-primary mb-2 sm:mb-0 min-w-0">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-row items-center justify-between">
+        <Link href="/" className="flex items-center gap-2 text-primary min-w-0">
           <Leaf className="h-6 w-6 sm:h-7 sm:w-7 flex-shrink-0" />
-          <span className="font-semibold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl whitespace-nowrap overflow-hidden text-ellipsis">
+          <span className="hidden sm:inline font-semibold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl whitespace-nowrap overflow-hidden text-ellipsis">
             {translations.nutriTrackTitle}
           </span>
         </Link>
 
-        <div className="flex flex-col items-stretch w-full sm:w-auto sm:flex-row sm:items-center gap-3 mt-3 sm:mt-0">
-          <Button
-            variant="outline"
-            size="default" 
-            onClick={onToggleLanguage}
-            className="text-xs sm:text-sm w-full sm:w-auto" 
+        <div className="flex items-center gap-3">
+          <Button variant="outline" size="default" onClick={onToggleLanguage} className="text-xs sm:text-sm"
             aria-label={currentLanguage === 'en' ? "Switch to Traditional Chinese" : "Switch to English"}
           >
             <Globe className="mr-1.5 h-4 w-4" />
@@ -55,9 +51,7 @@ export function AppHeader({
           </Button>
           <Button
             variant="secondary"
-            size="default" 
-            onClick={openPersonalStatementInNewWindow}
-            className="text-xs sm:text-sm w-full sm:w-auto" 
+            size="default" onClick={openPersonalStatementInNewWindow} className="text-xs sm:text-sm"
             aria-label={translations.personalStatement}
           >
             <Edit3 className="mr-1.5 h-4 w-4" />
@@ -67,8 +61,7 @@ export function AppHeader({
             <DropdownMenuTrigger asChild>
               <Button
                 variant="ghost"
-                size="default" 
-                className="flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start"
+                size="default" className="flex items-center gap-2"
               >
                 <Avatar className="h-8 w-8 bg-primary text-primary-foreground flex items-center justify-center" data-ai-hint="profile avatar user">
                    <User className="h-5 w-5" />

@@ -13,7 +13,6 @@ export default function PersonalStatementPage() {
   const statementSections = [
     { titleKey: 'personalStatementWhyTitle', bodyKey: 'personalStatementWhyBody' },
     { titleKey: 'personalStatementExperienceTitle', bodyKey: 'personalStatementExperienceBody' },
-    { titleKey: 'personalStatementGoalsTitle', bodyKey: 'personalStatementGoalsBody' },
     { titleKey: 'personalStatementReasonsTitle', bodyKey: 'personalStatementReasonsBody' },
     { titleKey: 'personalStatementConclusionTitle', bodyKey: 'personalStatementConclusionBody' },
   ] as const; 
@@ -29,6 +28,10 @@ export default function PersonalStatementPage() {
         </Button>
       </div>
       
+      <h1 className="text-2xl sm:text-3xl font-bold text-primary mb-6 text-center">
+        Personal Statement for the Application of PgD Human Nutrition & Dietetics
+      </h1>
+
       <div className="space-y-6 text-foreground/90 leading-relaxed bg-card p-6 sm:p-8 rounded-lg shadow-lg">
         {statementSections.map(section => (
           <div key={section.titleKey}>
@@ -42,11 +45,6 @@ export default function PersonalStatementPage() {
             ))}
           </div>
         ))}
-        <div>
-          <p className="mt-6 mb-3 text-sm sm:text-base italic">
-            {statementContent.personalStatementThanks}
-          </p>
-        </div>
       </div>
     </div>
   );
